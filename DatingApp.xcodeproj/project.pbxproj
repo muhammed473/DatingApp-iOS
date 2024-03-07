@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */; };
 		C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */; };
 		C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD874C2B98BF45005339B6 /* AppDelegate.swift */; };
 		C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD874E2B98BF45005339B6 /* SceneDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerStackViews.swift; sourceTree = "<group>"; };
 		C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationStackView.swift; sourceTree = "<group>"; };
 		C4CD87492B98BF45005339B6 /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD874C2B98BF45005339B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */,
+				C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
 				C4F11C662B98C50500FE31AA /* MainController.swift in Sources */,
 				C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */,
+				C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */,
 				C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */,
 				C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */,
 			);

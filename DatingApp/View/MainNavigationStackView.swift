@@ -17,9 +17,10 @@ class MainNavigationStackView : UIStackView{
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        heightAnchor.constraint(equalToConstant: 75).isActive = true
         settingsButton.setImage(UIImage(named: "top_left_profile")?.withRenderingMode(.alwaysOriginal), for:.normal)
         messageButton.setImage(UIImage(named: "top_messages_icon")?.withRenderingMode(.alwaysOriginal), for:.normal)
-        
+        datingAppIcon.contentMode = .scaleAspectFit
         [settingsButton,UIView(),datingAppIcon,UIView(),messageButton].forEach { view in
             addArrangedSubview(view)
         }

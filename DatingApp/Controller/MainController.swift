@@ -11,6 +11,13 @@ class MainController: UIViewController {
 
     // MARK: - Properties
     private let upperStack = MainNavigationStackView()
+    private let lowerStack = LowerStackViews()
+    private let cardView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemPink
+        view.layer.cornerRadius = 5 
+        return view
+    }()
     
     // MARK: - Lifecycle
     
@@ -24,7 +31,12 @@ class MainController: UIViewController {
     
     func configureUI(){
         view.backgroundColor = .white
-        view.addSubview(upperStack)
-        upperStack.anchor(top:view.safeAreaLayoutGuide.topAnchor,left:view.leftAnchor,right: view.rightAnchor)
+        let stacks = UIStackView(arrangedSubviews: [upperStack,cardView,lowerStack])
+        stacks.axis = .vertical
+        view.addSubview(stacks)
+        stacks.anchor(top:view.safeAreaLayoutGuide.topAnchor,left:view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor)
+        stacks.isLayoutMarginsRelativeArrangement = true
+        stacks.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
+        stacks.bringSubviewToFront(cardView)
     }
 }
