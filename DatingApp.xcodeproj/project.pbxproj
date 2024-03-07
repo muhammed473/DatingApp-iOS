@@ -7,23 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */; };
 		C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD874C2B98BF45005339B6 /* AppDelegate.swift */; };
 		C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD874E2B98BF45005339B6 /* SceneDelegate.swift */; };
-		C4CD87512B98BF45005339B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD87502B98BF45005339B6 /* ViewController.swift */; };
 		C4CD87542B98BF45005339B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4CD87522B98BF45005339B6 /* Main.storyboard */; };
 		C4CD87562B98BF47005339B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CD87552B98BF47005339B6 /* Assets.xcassets */; };
 		C4CD87592B98BF47005339B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4CD87572B98BF47005339B6 /* LaunchScreen.storyboard */; };
+		C4F11C662B98C50500FE31AA /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C652B98C50500FE31AA /* MainController.swift */; };
+		C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C682B98C5E000FE31AA /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationStackView.swift; sourceTree = "<group>"; };
 		C4CD87492B98BF45005339B6 /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD874C2B98BF45005339B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4CD874E2B98BF45005339B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C4CD87502B98BF45005339B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C4CD87532B98BF45005339B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C4CD87552B98BF47005339B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4CD87582B98BF47005339B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4CD875A2B98BF47005339B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C4F11C652B98C50500FE31AA /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		C4F11C682B98C5E000FE31AA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +60,65 @@
 		C4CD874B2B98BF45005339B6 /* DatingApp */ = {
 			isa = PBXGroup;
 			children = (
+				C4CD875A2B98BF47005339B6 /* Info.plist */,
+				C4F11C632B98C37000FE31AA /* Model */,
+				C4F11C612B98C35C00FE31AA /* View */,
+				C4F11C622B98C36200FE31AA /* ViewModel */,
+				C4F11C602B98C33F00FE31AA /* Controller */,
+				C4F11C672B98C5A800FE31AA /* OtherScripts */,
+				C4F11C642B98C44500FE31AA /* ExistingTools */,
+			);
+			path = DatingApp;
+			sourceTree = "<group>";
+		};
+		C4F11C602B98C33F00FE31AA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C4F11C652B98C50500FE31AA /* MainController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C4F11C612B98C35C00FE31AA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C4F11C622B98C36200FE31AA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C4F11C632B98C37000FE31AA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C4F11C642B98C44500FE31AA /* ExistingTools */ = {
+			isa = PBXGroup;
+			children = (
 				C4CD874C2B98BF45005339B6 /* AppDelegate.swift */,
 				C4CD874E2B98BF45005339B6 /* SceneDelegate.swift */,
-				C4CD87502B98BF45005339B6 /* ViewController.swift */,
 				C4CD87522B98BF45005339B6 /* Main.storyboard */,
 				C4CD87552B98BF47005339B6 /* Assets.xcassets */,
 				C4CD87572B98BF47005339B6 /* LaunchScreen.storyboard */,
-				C4CD875A2B98BF47005339B6 /* Info.plist */,
 			);
-			path = DatingApp;
+			path = ExistingTools;
+			sourceTree = "<group>";
+		};
+		C4F11C672B98C5A800FE31AA /* OtherScripts */ = {
+			isa = PBXGroup;
+			children = (
+				C4F11C682B98C5E000FE31AA /* Extensions.swift */,
+			);
+			path = OtherScripts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +192,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4CD87512B98BF45005339B6 /* ViewController.swift in Sources */,
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
+				C4F11C662B98C50500FE31AA /* MainController.swift in Sources */,
+				C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */,
 				C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */,
+				C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
