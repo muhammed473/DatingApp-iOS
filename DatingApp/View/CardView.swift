@@ -19,7 +19,6 @@ class CardView : UIView{
     private let imageView : UIImageView = {
        let imagView = UIImageView()
         imagView.contentMode = .scaleAspectFill
-        imagView.image = UIImage(named: "kelly3")
         return imagView
     }()
     private let informationLabel : UILabel = {
@@ -36,13 +35,18 @@ class CardView : UIView{
         return button
     }()
     private let gradientLayer = CAGradientLayer()
+    private let cardviewModel : CardViewModel
     
     // MARK: - Lifecycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+     init(cardviewModel: CardViewModel) {
+        self.cardviewModel = cardviewModel
+        super.init(frame: .zero)
+         
         configureGestureRecognizers()
         
+         imageView.image = cardviewModel.userModel.images.first?.image
+         
         backgroundColor = .purple
         layer.cornerRadius = 12
         clipsToBounds = true

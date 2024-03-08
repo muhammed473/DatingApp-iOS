@@ -10,6 +10,8 @@
 		C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */; };
 		C40491F02B99C70A00BECE41 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491EF2B99C70A00BECE41 /* CardView.swift */; };
 		C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */; };
+		C491C3ED2B9ADD7F0036571E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491C3EC2B9ADD7F0036571E /* UserModel.swift */; };
+		C4B15A182B9AECA800B701FA /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B15A172B9AECA800B701FA /* CardViewModel.swift */; };
 		C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD874C2B98BF45005339B6 /* AppDelegate.swift */; };
 		C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD874E2B98BF45005339B6 /* SceneDelegate.swift */; };
 		C4CD87542B98BF45005339B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4CD87522B98BF45005339B6 /* Main.storyboard */; };
@@ -23,6 +25,8 @@
 		C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerStackViews.swift; sourceTree = "<group>"; };
 		C40491EF2B99C70A00BECE41 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationStackView.swift; sourceTree = "<group>"; };
+		C491C3EC2B9ADD7F0036571E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		C4B15A172B9AECA800B701FA /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		C4CD87492B98BF45005339B6 /* DatingApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DatingApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CD874C2B98BF45005339B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4CD874E2B98BF45005339B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 		C4F11C622B98C36200FE31AA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				C4B15A172B9AECA800B701FA /* CardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -103,6 +108,7 @@
 		C4F11C632B98C37000FE31AA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C491C3EC2B9ADD7F0036571E /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,11 +206,13 @@
 			files = (
 				C40491F02B99C70A00BECE41 /* CardView.swift in Sources */,
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
+				C491C3ED2B9ADD7F0036571E /* UserModel.swift in Sources */,
 				C4F11C662B98C50500FE31AA /* MainController.swift in Sources */,
 				C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */,
 				C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */,
 				C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */,
 				C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */,
+				C4B15A182B9AECA800B701FA /* CardViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
