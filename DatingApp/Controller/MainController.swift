@@ -47,7 +47,7 @@ class MainController: UIViewController {
         let image2 = UIImageView(image: UIImage(named: "jane2"))
         let image3 = UIImageView(image: UIImage(named: "kelly1"))
         let image4 = UIImageView(image: UIImage(named: "kelly2"))
-        let user1 = UserModel(name: "Jane Çitlenbik", age: 24, images: [image1,image2] )
+        let user1 = UserModel(name: "Jane Çitlen", age: 24, images: [image1,image2] )
         let user2 = UserModel(name: "Kelly Orban", age: 45, images: [image1,image2] )
         let cardView1 = CardView(cardviewModel: CardViewModel(userModel: user1))
         let cardView2 = CardView(cardviewModel: CardViewModel(userModel: user2))

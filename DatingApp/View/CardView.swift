@@ -15,18 +15,16 @@ enum DirectionSwipe : Int{
 class CardView : UIView{
     
     // MARK: - Properties
-    
+   
     private let imageView : UIImageView = {
        let imagView = UIImageView()
         imagView.contentMode = .scaleAspectFill
         return imagView
     }()
-    private let informationLabel : UILabel = {
+    private lazy var informationLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 2
-        let attributedText = NSMutableAttributedString(string: "Özlem Çetin",attributes: [.font:UIFont.systemFont(ofSize: 30,weight: .heavy),.foregroundColor:UIColor.white])
-        attributedText.append(NSMutableAttributedString(string: "   19",attributes: [.font:UIFont.systemFont(ofSize: 22,weight: .heavy),.foregroundColor:UIColor.white]))
-        label.attributedText = attributedText
+        label.attributedText = cardviewModel.userInformationText
         return label
     }()
     private lazy var informationButton : UIButton = {
@@ -39,14 +37,14 @@ class CardView : UIView{
     
     // MARK: - Lifecycle
     
-     init(cardviewModel: CardViewModel) {
+    init(cardviewModel: CardViewModel) {
         self.cardviewModel = cardviewModel
         super.init(frame: .zero)
-         
+        
         configureGestureRecognizers()
         
-         imageView.image = cardviewModel.userModel.images.first?.image
-         
+        imageView.image = cardviewModel.userModel.images.first?.image
+        
         backgroundColor = .purple
         layer.cornerRadius = 12
         clipsToBounds = true
