@@ -7,9 +7,11 @@
 
 import UIKit
 
-struct CardViewModel {
+class CardViewModel {
     let userModel : UserModel
     let userInformationText : NSAttributedString
+    private var imageIndex = 0
+    var currentImage : UIImage?
     
     init(userModel: UserModel) {
         self.userModel = userModel
@@ -18,5 +20,17 @@ struct CardViewModel {
         attributedText.append(NSMutableAttributedString(string: "   \(userModel.age)",attributes: [.font:UIFont.systemFont(ofSize: 22,weight: .heavy),.foregroundColor:UIColor.white]))
         
         self.userInformationText = attributedText
+    }
+    
+    func nextPhotoShow(){
+        guard imageIndex < userModel.images.count - 1 else {return}
+        imageIndex += 1
+        currentImage = userModel.images[imageIndex].image
+    }
+    
+    func previousPhotoShow(){
+        guard imageIndex > 0  else {return}
+        imageIndex -= 1
+        currentImage = userModel.images[imageIndex].image
     }
 }

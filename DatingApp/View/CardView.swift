@@ -130,5 +130,15 @@ class CardView : UIView{
     
     @objc func touchChangePhoto(sender: UITapGestureRecognizer) {
         print("Fotoğrafa dokunuldu.")
+        let location = sender.location(in: nil).x
+        let showNextPhoto = location > self.frame.width / 2
+        print("Bir sonraki fotoğrafı göstermek için ekranda doğru yere tıklanıldımı ? : \(showNextPhoto)")
+        if showNextPhoto {
+            cardviewModel.nextPhotoShow()
+        }
+        else {
+            cardviewModel.previousPhotoShow()
+        }
+        imageView.image = cardviewModel.currentImage
     }
 }
