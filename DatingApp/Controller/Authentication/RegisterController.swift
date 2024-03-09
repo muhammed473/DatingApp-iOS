@@ -34,6 +34,7 @@ class RegisterController: UIViewController{
         button.addTarget(self, action: #selector(touchSignInButton), for: .touchUpInside)
         return button
     }()
+    
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -62,6 +63,9 @@ class RegisterController: UIViewController{
     
     @objc func touchSelectPhoto() {
         print("Fotoğraf seçme butonuna tıklandı.")
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        present(picker,animated: true,completion: nil)
     }
     
     @objc func touchRegisterButton() {
@@ -71,6 +75,20 @@ class RegisterController: UIViewController{
     @objc func touchSignInButton() {
         print("Giriş yap butonuna tıklandı.")
         navigationController?.popViewController(animated: true) // Register screen closed.
+    }
+}
+
+// MARK: - ImagePicker
+
+extension RegisterController : UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        photoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        photoButton.layer.borderColor = UIColor(white: 1, alpha: 0.6).cgColor
+        photoButton.layer.cornerRadius = 9
+        photoButton.layer.borderWidth = 3.5
+        photoButton.imageView?.contentMode = .scaleAspectFill
+        dismiss(animated: true,completion: nil)
     }
 }
 
