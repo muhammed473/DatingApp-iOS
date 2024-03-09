@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */; };
 		C40491F02B99C70A00BECE41 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491EF2B99C70A00BECE41 /* CardView.swift */; };
+		C40E22CB2B9CEF35001DDAE5 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40E22CA2B9CEF35001DDAE5 /* AuthenticationViewModel.swift */; };
 		C4651D0F2B990B5800A87A56 /* MainNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */; };
 		C491C3ED2B9ADD7F0036571E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491C3EC2B9ADD7F0036571E /* UserModel.swift */; };
 		C4B15A182B9AECA800B701FA /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B15A172B9AECA800B701FA /* CardViewModel.swift */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerStackViews.swift; sourceTree = "<group>"; };
 		C40491EF2B99C70A00BECE41 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		C40E22CA2B9CEF35001DDAE5 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		C4651D0E2B990B5800A87A56 /* MainNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationStackView.swift; sourceTree = "<group>"; };
 		C491C3EC2B9ADD7F0036571E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C4B15A172B9AECA800B701FA /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				C4B15A172B9AECA800B701FA /* CardViewModel.swift */,
+				C40E22CA2B9CEF35001DDAE5 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 			files = (
 				C4F95C042B9C262E00C74A43 /* TextFieldCustom.swift in Sources */,
 				C40491F02B99C70A00BECE41 /* CardView.swift in Sources */,
+				C40E22CB2B9CEF35001DDAE5 /* AuthenticationViewModel.swift in Sources */,
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
 				C4CE33582B9B99BC00A3CD63 /* RegisterController.swift in Sources */,
 				C491C3ED2B9ADD7F0036571E /* UserModel.swift in Sources */,

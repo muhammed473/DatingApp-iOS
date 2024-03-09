@@ -15,6 +15,7 @@ class RegisterController: UIViewController{
         button.tintColor = .white
         button.setImage(UIImage(named: "plus_photo"), for: .normal)
         button.addTarget(self, action: #selector(touchSelectPhoto), for: .touchUpInside)
+        button.clipsToBounds = true
         return button
     }()
     private let emailTextField = TextFieldCustom(placeHolder: "Email")
@@ -34,11 +35,13 @@ class RegisterController: UIViewController{
         button.addTarget(self, action: #selector(touchSignInButton), for: .touchUpInside)
         return button
     }()
+    private var registerViewModel = RegisterViewModel()
     
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTextFieldsObserver()
         configureUI()
     }
     
@@ -59,6 +62,22 @@ class RegisterController: UIViewController{
         signInButton.anchor(left:view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor,paddingLeft: 28,paddingRight: 28)
     }
     
+    func configureTextFieldsObserver() {
+        emailTextField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+        fullNameTextField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+    }
+    
+    func checkForm(){
+        if registerViewModel.isFormValid {
+            registerButton.isEnabled = true
+            registerButton.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+        }else {
+            registerButton.isEnabled = false
+            registerButton.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        }
+    }
+    
     // MARK: - Actions
     
     @objc func touchSelectPhoto() {
@@ -75,6 +94,19 @@ class RegisterController: UIViewController{
     @objc func touchSignInButton() {
         print("Giriş yap butonuna tıklandı.")
         navigationController?.popViewController(animated: true) // Register screen closed.
+    }
+    
+    @objc func textFieldsDidChange (currentTextField : UITextField ) {
+      //  print("Metin  : \(currentTextField.text!)")
+        if currentTextField == emailTextField {
+            registerViewModel.email = currentTextField.text
+        }else if currentTextField == fullNameTextField{
+            registerViewModel.fullName = currentTextField.text
+        }else{
+            registerViewModel.password = currentTextField.text
+        }
+        print("Form geçerli mi : \(registerViewModel.isFormValid)")
+        checkForm()
     }
 }
 

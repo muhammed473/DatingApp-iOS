@@ -32,11 +32,13 @@ class LoginController : UIViewController {
         button.addTarget(self, action: #selector(touchRegisterButton), for: .touchUpInside)
         return button
     }()
+    private var loginViewModel = LoginViewModel()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureTextFieldsObserver()
         configureUI()
     }
     
@@ -61,14 +63,40 @@ class LoginController : UIViewController {
         signUpButton.anchor(left:view.leftAnchor,bottom: view.safeAreaLayoutGuide.bottomAnchor,right: view.rightAnchor,paddingLeft: 28,paddingRight: 28)
     }
     
+    func configureTextFieldsObserver() {
+        emailTextField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged)
+    }
+    
+    func checkForm(){
+        if loginViewModel.isFormValid {
+            authButton.isEnabled = true
+            authButton.backgroundColor = #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)
+        }else {
+            authButton.isEnabled = false
+            authButton.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
+        }
+    }
     
     // MARK: - Actions
     
     @objc func touchLogInButton() {
-        
+       print("GİRİŞ butonuna tıklandı.")
     }
     
     @objc func touchRegisterButton() {
         navigationController?.pushViewController(RegisterController(), animated: true)
     }
+    
+    @objc func textFieldsDidChange (currentTextField : UITextField ) {
+      //  print("Metin  : \(currentTextField.text!)")
+        if currentTextField == emailTextField {
+            loginViewModel.email = currentTextField.text
+        }else{
+            loginViewModel.password = currentTextField.text
+        }
+        print("Form geçerli mi : \(loginViewModel.isFormValid)")
+        checkForm()
+    }
+    
 }
