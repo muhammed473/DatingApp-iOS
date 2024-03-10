@@ -36,6 +36,7 @@ class RegisterController: UIViewController{
         return button
     }()
     private var registerViewModel = RegisterViewModel()
+    private var profileImage : UIImage?
     
     // MARK: - Lifecycle
 
@@ -89,6 +90,20 @@ class RegisterController: UIViewController{
     
     @objc func touchRegisterButton() {
         print("Kaydol butonuna tıklandı.")
+        guard let email = emailTextField.text else {return}
+        guard let fullName = fullNameTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let profileImage = self.profileImage else {return}
+        let authCredentialsModelValues = AuthCredentialsModel(email: email, fullName: fullName,
+                                                              password: password, profileImage: profileImage)
+        
+        AuthenticationService.registerUser(authCredentialsModel: authCredentialsModelValues) { error in
+            if let error = error {
+                print("Kullanıcı kaydedilirken hata oluştu : \(error.localizedDescription)")
+                return
+            }
+            print("Kullanıcı başarıyla kaydedildi.")
+        }
     }
     
     @objc func touchSignInButton() {
@@ -115,6 +130,7 @@ class RegisterController: UIViewController{
 extension RegisterController : UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
+        self.profileImage = image
         photoButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
         photoButton.layer.borderColor = UIColor(white: 1, alpha: 0.6).cgColor
         photoButton.layer.cornerRadius = 9
