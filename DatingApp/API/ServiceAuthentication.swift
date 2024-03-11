@@ -34,5 +34,11 @@ struct AuthenticationService {
                 Firestore.firestore().collection("users").document(uuid).setData(databaseData, completion: completion)
             }
         }
+        
     }
+    
+    static func loginUser(email: String,password:String,completion: @escaping ((AuthDataResult?,Error?) -> Void)){
+        Auth.auth().signIn(withEmail: email, password: password, completion: completion)
+    }
+    
 }

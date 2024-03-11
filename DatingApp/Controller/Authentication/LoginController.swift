@@ -81,7 +81,15 @@ class LoginController : UIViewController {
     // MARK: - Actions
     
     @objc func touchLogInButton() {
-       print("GİRİŞ butonuna tıklandı.")
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        AuthenticationService.loginUser(email: email, password: password) { result,error in
+            if let error = error {
+                print("Kullanıcı kaydedilirken hata oluştu : \(error.localizedDescription)")
+                return
+            }
+            self.dismiss(animated: true,completion: nil)
+        }
     }
     
     @objc func touchRegisterButton() {

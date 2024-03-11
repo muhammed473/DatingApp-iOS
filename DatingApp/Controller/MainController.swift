@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class MainController: UIViewController {
 
@@ -24,9 +25,10 @@ class MainController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userLoginCheck()
         configureUI()
         configureCards()
-        
+      //  logOut()
     }
     
    // MARK: - Assistant
@@ -55,5 +57,36 @@ class MainController: UIViewController {
         cardView.addSubview(cardView2)
         cardView1.fillSuperview()
         cardView2.fillSuperview()
+    }
+    
+    func presentLoginController(){
+        DispatchQueue.main.async {
+            let loginController = LoginController()
+            let nav = UINavigationController(rootViewController: loginController)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true)
+        }
+        
+    }
+    
+    // MARK: - Firebase Connections
+    
+    func userLoginCheck() {
+        if Auth.auth().currentUser == nil {
+            presentLoginController()
+        }
+        else {
+            print("Kullanıcı oturum açmış.")
+        }
+    }
+    
+    func logOut(){
+        do{
+            try Auth.auth().signOut()
+            presentLoginController()
+        }
+        catch {
+            print("Oturum kapatılamadı.")
+        }
     }
 }
