@@ -24,4 +24,10 @@ struct Service {
             }
         }
     }
+    
+    static func fetchUserData(uuid:String,completion:@escaping(UserModel)-> Void){
+        FireStoreUsers.document(uuid).getDocument { snapshot, error in
+            print("SNAPSHOT : \(snapshot?.data())")
+        }
+    }
 }

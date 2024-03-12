@@ -29,6 +29,7 @@ class MainController: UIViewController {
         configureUI()
         configureCards()
       //  logOut()
+        fetchUser()
     }
     
    // MARK: - Assistant
@@ -87,6 +88,13 @@ class MainController: UIViewController {
         }
         catch {
             print("Oturum kapatılamadı.")
+        }
+    }
+    
+    func fetchUser() {
+        guard let uuid = Auth.auth().currentUser?.uid else {return}
+        Service.fetchUserData(uuid: uuid) { userModel in
+            print("FireStore'dan veriler çekildi.")
         }
     }
 }

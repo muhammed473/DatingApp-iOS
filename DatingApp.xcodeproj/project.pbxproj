@@ -11,6 +11,7 @@
 		C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */; };
 		C40491F02B99C70A00BECE41 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40491EF2B99C70A00BECE41 /* CardView.swift */; };
 		C40E22CB2B9CEF35001DDAE5 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40E22CA2B9CEF35001DDAE5 /* AuthenticationViewModel.swift */; };
+		C42B58782BA10D28000827AC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42B58772BA10D28000827AC /* Constants.swift */; };
 		C43ABC692B9DEFF100C1D5CC /* ServiceAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43ABC682B9DEFF100C1D5CC /* ServiceAuthentication.swift */; };
 		C43ABC6B2B9DF00D00C1D5CC /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43ABC6A2B9DF00D00C1D5CC /* Service.swift */; };
 		C44199802B9D90C70088E5DA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C441997F2B9D90C70088E5DA /* GoogleService-Info.plist */; };
@@ -37,6 +38,7 @@
 		C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerStackViews.swift; sourceTree = "<group>"; };
 		C40491EF2B99C70A00BECE41 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		C40E22CA2B9CEF35001DDAE5 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		C42B58772BA10D28000827AC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C43ABC682B9DEFF100C1D5CC /* ServiceAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAuthentication.swift; sourceTree = "<group>"; };
 		C43ABC6A2B9DF00D00C1D5CC /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		C441997F2B9D90C70088E5DA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				C4F11C682B98C5E000FE31AA /* Extensions.swift */,
 				C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */,
 				C4F95C052B9C313600C74A43 /* ButtonAuthentication.swift */,
+				C42B58772BA10D28000827AC /* Constants.swift */,
 			);
 			path = OtherScripts;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4F95C042B9C262E00C74A43 /* TextFieldCustom.swift in Sources */,
+				C42B58782BA10D28000827AC /* Constants.swift in Sources */,
 				C40491F02B99C70A00BECE41 /* CardView.swift in Sources */,
 				C40E22CB2B9CEF35001DDAE5 /* AuthenticationViewModel.swift in Sources */,
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
