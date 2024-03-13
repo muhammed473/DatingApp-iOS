@@ -43,7 +43,7 @@ class CardView : UIView{
         
         configureGestureRecognizers()
         
-        imageView.image = cardviewModel.userModel.images.first?.image
+     //   imageView.image = cardviewModel.userModel.images.first?.image
         
         backgroundColor = .purple
         layer.cornerRadius = 12
@@ -134,10 +134,10 @@ class CardView : UIView{
         let showNextPhoto = location > self.frame.width / 2
         print("Bir sonraki fotoğrafı göstermek için ekranda doğru yere tıklanıldımı ? : \(showNextPhoto)")
         if showNextPhoto {
-            cardviewModel.nextPhotoShow()
+        //    cardviewModel.nextPhotoShow()
         }
         else {
-            cardviewModel.previousPhotoShow()
+         //   cardviewModel.previousPhotoShow()
         }
         imageView.image = cardviewModel.currentImage
     }

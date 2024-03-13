@@ -22,7 +22,7 @@ class CardViewModel {
         self.userInformationText = attributedText
     }
     
-    func nextPhotoShow(){
+   /* func nextPhotoShow(){
         guard imageIndex < userModel.images.count - 1 else {return}
         imageIndex += 1
         currentImage = userModel.images[imageIndex].image
@@ -32,5 +32,5 @@ class CardViewModel {
         guard imageIndex > 0  else {return}
         imageIndex -= 1
         currentImage = userModel.images[imageIndex].image
-    }
+    } */
 }

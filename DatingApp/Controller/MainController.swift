@@ -46,7 +46,7 @@ class MainController: UIViewController {
     }
     
     func configureCards(){
-        let image1 = UIImageView(image: UIImage(named: "jane1"))
+       /* let image1 = UIImageView(image: UIImage(named: "jane1"))
         let image2 = UIImageView(image: UIImage(named: "jane2"))
         let image3 = UIImageView(image: UIImage(named: "kelly1"))
         let image4 = UIImageView(image: UIImage(named: "kelly2"))
@@ -57,7 +57,9 @@ class MainController: UIViewController {
         cardView.addSubview(cardView1)
         cardView.addSubview(cardView2)
         cardView1.fillSuperview()
-        cardView2.fillSuperview()
+        cardView2.fillSuperview() */
+        
+        
     }
     
     func presentLoginController(){
@@ -93,8 +95,9 @@ class MainController: UIViewController {
     
     func fetchUser() {
         guard let uuid = Auth.auth().currentUser?.uid else {return}
-        Service.fetchUserData(uuid: uuid) { userModel in
+        Service.fetchUserData(uuid: uuid) { userModelValues in
             print("FireStore'dan veriler çekildi.")
+            print("İsim : \(userModelValues.name)")
         }
     }
 }
