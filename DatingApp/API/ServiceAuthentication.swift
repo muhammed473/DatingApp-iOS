@@ -23,15 +23,16 @@ struct AuthenticationService {
                     print("Kullanıcı oturum açarken hata oluştu : \(error.localizedDescription)")
                     return
                 }
-                guard let uuid = result?.user.uid else {return}
+                guard let uid = result?.user.uid else {return}
                 let databaseData =
                 [
                                     "email" : authCredentialsModel.email,
                                     "fullName" : authCredentialsModel.fullName,
                                     "imageUrl" : imageUrl,
-                                    "age" : 22
+                                    "age" : 22,
+                                    "uid" : uid
                 ] as [String:Any]
-                FireStoreUsers.document(uuid).setData(databaseData, completion: completion)
+                FireStoreUsers.document(uid).setData(databaseData, completion: completion)
             }
         }
         

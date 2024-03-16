@@ -25,11 +25,27 @@ struct Service {
         }
     }
     
-    static func fetchUserData(uuid:String,completion:@escaping(UserModel)-> Void){
-        FireStoreUsers.document(uuid).getDocument { snapshot, error in
+    static func fetchUserData(uid:String,completion:@escaping(UserModel)-> Void){
+        FireStoreUsers.document(uid).getDocument { snapshot, error in
             guard let dictionary = snapshot?.data() else {return}
             let userModelValues =  UserModel(dictionary: dictionary)
             completion(userModelValues)
+        }
+    }
+    
+  static  func fetchUsersData(completion : @escaping([UserModel]) -> Void) {
+        var users = [UserModel]()
+        FireStoreUsers.getDocuments { allPersons, error in
+            allPersons?.documents.forEach({ snapshot in
+                let dictionary = snapshot.data()
+                let usersModelsValues = UserModel(dictionary: dictionary)
+                users.append(usersModelsValues)
+                 if users.count == allPersons?.documents.count{
+                    print("Kişi sayısı : \(allPersons?.documents.count)")
+                    print("Users array count : \(users.count)")
+                    completion(users)
+                }
+            })
         }
     }
 }

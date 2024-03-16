@@ -11,15 +11,15 @@ struct UserModel {
     var name : String
     var age : Int
     var email : String
-    let uuid : String
+    let uid : String
     let profileImageUrl:String
     
     init(dictionary: [String:Any]) {
         self.name = dictionary["fullName"] as? String ?? ""
         self.age = dictionary["age"] as? Int ?? 0
         self.email = dictionary["email"] as? String ?? ""
+        self.uid = dictionary["uid"] as? String ?? ""
         self.profileImageUrl = dictionary["imageUrl"] as? String ?? ""
-        self.uuid = dictionary["uuid"] as? String ?? ""
     }
 }
 

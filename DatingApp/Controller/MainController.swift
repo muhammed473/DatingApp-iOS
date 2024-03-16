@@ -20,6 +20,9 @@ class MainController: UIViewController {
         view.layer.cornerRadius = 5 
         return view
     }()
+    private var cardViewModels = [CardViewModel](){
+        didSet{configureCards()}
+    }
     
     // MARK: - Lifecycle
     
@@ -27,9 +30,8 @@ class MainController: UIViewController {
         super.viewDidLoad()
         userLoginCheck()
         configureUI()
-        configureCards()
       //  logOut()
-        fetchUser()
+        fetchUsers()
     }
     
    // MARK: - Assistant
@@ -46,19 +48,12 @@ class MainController: UIViewController {
     }
     
     func configureCards(){
-       /* let image1 = UIImageView(image: UIImage(named: "jane1"))
-        let image2 = UIImageView(image: UIImage(named: "jane2"))
-        let image3 = UIImageView(image: UIImage(named: "kelly1"))
-        let image4 = UIImageView(image: UIImage(named: "kelly2"))
-        let user1 = UserModel(name: "Jane Çitlen", age: 24, images: [image1,image2] )
-        let user2 = UserModel(name: "Kelly Orban", age: 45, images: [image1,image2] )
-        let cardView1 = CardView(cardviewModel: CardViewModel(userModel: user1))
-        let cardView2 = CardView(cardviewModel: CardViewModel(userModel: user2))
-        cardView.addSubview(cardView1)
-        cardView.addSubview(cardView2)
-        cardView1.fillSuperview()
-        cardView2.fillSuperview() */
-        
+        print("Card'lar şimdi oluşturuluyor..")
+        self.cardViewModels.forEach { cardViewModel in
+            let currentCardView = CardView(cardviewModel: cardViewModel)
+            cardView.addSubview(currentCardView)
+            currentCardView.fillSuperview()
+        }
         
     }
     
@@ -94,10 +89,21 @@ class MainController: UIViewController {
     }
     
     func fetchUser() {
-        guard let uuid = Auth.auth().currentUser?.uid else {return}
-        Service.fetchUserData(uuid: uuid) { userModelValues in
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        Service.fetchUserData(uid: uid) { userModelValues in
             print("FireStore'dan veriler çekildi.")
             print("İsim : \(userModelValues.name)")
         }
     }
-}
+    
+    func fetchUsers(){
+        Service.fetchUsersData { usersModelsValues in
+         //   print("Kullanıcıların modellerinin değerleri(kullanıcılar) : \(usersModelsValues)")
+            self.cardViewModels = usersModelsValues.map({CardViewModel(userModel: $0)})
+           /* usersModelsValues.forEach { user in
+                let viewModel = CardViewModel(userModel: user)
+                self.cardViewModels.append(viewModel)*/
+            }
+        }
+    }
+
