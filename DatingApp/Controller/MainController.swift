@@ -38,6 +38,7 @@ class MainController: UIViewController {
     
     func configureUI(){
         view.backgroundColor = .white
+        upperStack.delegate = self
         let stacks = UIStackView(arrangedSubviews: [upperStack,cardView,lowerStack])
         stacks.axis = .vertical
         view.addSubview(stacks)
@@ -105,5 +106,20 @@ class MainController: UIViewController {
                 self.cardViewModels.append(viewModel)*/
             }
         }
+    
     }
+
+extension MainController: MainNavigationStackViewDelegate {
+    func settingsShow() {
+        print("PRİNT: MainController scriptinden SettingsController sınıfına geçiş yapılıyor.. ")
+        let settingsController = SettingsController()
+        present(settingsController, animated: true, completion: nil)
+    }
+    
+    func messagesShow() {
+        print("PRİNT: MainController scriptinden mesajlar sayfası ayarlanıyor.. ")
+    }
+    
+    
+}
 
