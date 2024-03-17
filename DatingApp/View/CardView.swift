@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 enum DirectionSwipe : Int{
     case left = -1
@@ -43,7 +44,7 @@ class CardView : UIView{
         
         configureGestureRecognizers()
         
-     //   imageView.image = cardviewModel.userModel.images.first?.image
+        imageView.sd_setImage(with: cardviewModel.imageUrl)
         
         backgroundColor = .purple
         layer.cornerRadius = 12
@@ -139,6 +140,6 @@ class CardView : UIView{
         else {
          //   cardviewModel.previousPhotoShow()
         }
-        imageView.image = cardviewModel.currentImage
+       // imageView.image = cardviewModel.currentImage
     }
 }
