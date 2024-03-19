@@ -113,7 +113,9 @@ extension MainController: MainNavigationStackViewDelegate {
     func settingsShow() {
         print("PRİNT: MainController scriptinden SettingsController sınıfına geçiş yapılıyor.. ")
         let settingsController = SettingsController()
-        present(settingsController, animated: true, completion: nil)
+        let navi = UINavigationController(rootViewController: settingsController)
+        navi.modalPresentationStyle = .fullScreen
+        present(navi, animated: true, completion: nil)
     }
     
     func messagesShow() {
