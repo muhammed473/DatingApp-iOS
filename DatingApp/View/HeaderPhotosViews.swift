@@ -7,21 +7,28 @@
 
 import UIKit
 
+protocol HeaderPhotosViewsDelegate : class{
+    func setHeaderPhotosViews(headerPhotos: HeaderPhotosViews, didSelect index:Int)
+}
+
 class HeaderPhotosViews: UIView{
     
     // MARK: - Properties
     
-    var buttons = [UIButton]()
+    var allButtons = [UIButton]()
+    weak var delegate : HeaderPhotosViewsDelegate?
     
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemGroupedBackground
-        
-        let button1 = createButtons()
-        let button2 = createButtons()
-        let button3 = createButtons()
+        let button1 = createButtons(index: 0)
+        let button2 = createButtons(index: 1)
+        let button3 = createButtons(index: 2)
+        allButtons.append(button1)
+        allButtons.append(button2)
+        allButtons.append(button3)
         addSubview(button1)
         button1.anchor(top:topAnchor,left: leftAnchor,bottom: bottomAnchor,paddingTop: 15,paddingLeft: 15,paddingBottom: 16)
         button1.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.45).isActive = true
@@ -41,20 +48,21 @@ class HeaderPhotosViews: UIView{
     
     // MARK: - Assistans
     
-    func createButtons() -> UIButton {
+    func createButtons(index:Int) -> UIButton {
         let button = UIButton(type: .system)
         button.setTitle("Photo Select", for: .normal)
         button.addTarget(self, action: #selector(touchPhotoSelect), for: .touchUpInside)
         button.clipsToBounds = true
         button.backgroundColor = .white
         button.imageView?.contentMode = .scaleAspectFill
+        button.tag = index
         return button
     }
     
     // MARK: - Actions
     
-    @objc func touchPhotoSelect() {
-        print("PRİNT: Fotoğraf seçiciyi göster.")
+    @objc func touchPhotoSelect(sender: UIButton) {
+        delegate?.setHeaderPhotosViews(headerPhotos: self, didSelect: sender.tag)
     }
     
 }
