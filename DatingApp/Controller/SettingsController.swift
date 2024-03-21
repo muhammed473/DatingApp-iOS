@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let cellClassIdentifer = "SettingsCell"
+
 class SettingsController : UITableViewController {
     
     // MARK: - Properties
@@ -34,6 +36,7 @@ class SettingsController : UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(touchDone))
         tableView.separatorStyle = .none
         tableView.tableHeaderView = headerPhotosViews
+        tableView.register(SettingsCellsViews.self, forCellReuseIdentifier: cellClassIdentifer)
         headerPhotosViews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
     }
     
@@ -69,5 +72,33 @@ extension SettingsController: UIImagePickerControllerDelegate,UINavigationContro
         let selectedImage = info[.originalImage] as? UIImage
         setHeaderImages(image: selectedImage)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UITableViewDataSource
+
+extension SettingsController {
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return SettingsSection.allCases.count
+    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellClassIdentifer, for: indexPath) as! SettingsCellsViews
+        return cell
+    }
+}
+// MARK: - UITableViewDelegate
+
+extension SettingsController {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 32
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        print("PRİNT: Section : \(section)")
+        guard let section = SettingsSection(rawValue: section) else { return nil }
+        print("PRİNT : Section description is \(section.description) for value \(section.rawValue)")
+        return section.description
     }
 }
