@@ -28,7 +28,7 @@
 		C4CE33562B9B98FA00A3CD63 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE33552B9B98FA00A3CD63 /* LoginController.swift */; };
 		C4CE33582B9B99BC00A3CD63 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CE33572B9B99BC00A3CD63 /* RegisterController.swift */; };
 		C4D0EC3B2BABEE43003EEF7C /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D0EC3A2BABEE43003EEF7C /* SettingsViewModel.swift */; };
-		C4E33A2C2BABB2D800F8E2BD /* SettingsCellsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E33A2B2BABB2D800F8E2BD /* SettingsCellsViews.swift */; };
+		C4E33A2C2BABB2D800F8E2BD /* SettingsCellsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E33A2B2BABB2D800F8E2BD /* SettingsCellsView.swift */; };
 		C4F11C662B98C50500FE31AA /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C652B98C50500FE31AA /* MainController.swift */; };
 		C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C682B98C5E000FE31AA /* Extensions.swift */; };
 		C4F95C042B9C262E00C74A43 /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */; };
@@ -61,7 +61,7 @@
 		C4CE33552B9B98FA00A3CD63 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		C4CE33572B9B99BC00A3CD63 /* RegisterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		C4D0EC3A2BABEE43003EEF7C /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		C4E33A2B2BABB2D800F8E2BD /* SettingsCellsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellsViews.swift; sourceTree = "<group>"; };
+		C4E33A2B2BABB2D800F8E2BD /* SettingsCellsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellsView.swift; sourceTree = "<group>"; };
 		C4F11C652B98C50500FE31AA /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		C4F11C682B98C5E000FE31AA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 				C40491ED2B999D2A00BECE41 /* LowerStackViews.swift */,
 				C40491EF2B99C70A00BECE41 /* CardView.swift */,
 				C4BC6BB22BA78CE1001A98CD /* HeaderPhotosViews.swift */,
-				C4E33A2B2BABB2D800F8E2BD /* SettingsCellsViews.swift */,
+				C4E33A2B2BABB2D800F8E2BD /* SettingsCellsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -341,7 +341,7 @@
 				C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */,
 				C43ABC6B2B9DF00D00C1D5CC /* Service.swift in Sources */,
 				C4F95C062B9C313600C74A43 /* ButtonAuthentication.swift in Sources */,
-				C4E33A2C2BABB2D800F8E2BD /* SettingsCellsViews.swift in Sources */,
+				C4E33A2C2BABB2D800F8E2BD /* SettingsCellsView.swift in Sources */,
 				C4CD874F2B98BF45005339B6 /* SceneDelegate.swift in Sources */,
 				C43ABC692B9DEFF100C1D5CC /* ServiceAuthentication.swift in Sources */,
 				C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */,

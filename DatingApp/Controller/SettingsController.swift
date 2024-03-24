@@ -36,7 +36,8 @@ class SettingsController : UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(touchDone))
         tableView.separatorStyle = .none
         tableView.tableHeaderView = headerPhotosViews
-        tableView.register(SettingsCellsViews.self, forCellReuseIdentifier: cellClassIdentifer)
+        tableView.backgroundColor = .systemGroupedBackground
+        tableView.register(SettingsCellsView.self, forCellReuseIdentifier: cellClassIdentifer)
         headerPhotosViews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
     }
     
@@ -82,13 +83,14 @@ extension SettingsController {
         return SettingsSection.allCases.count
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellClassIdentifer, for: indexPath) as! SettingsCellsViews
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellClassIdentifer, for: indexPath) as! SettingsCellsView
         return cell
     }
 }
+
 // MARK: - UITableViewDelegate
 
 extension SettingsController {
@@ -96,9 +98,12 @@ extension SettingsController {
         return 32
     }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        print("PRİNT: Section : \(section)")
         guard let section = SettingsSection(rawValue: section) else { return nil }
-        print("PRİNT : Section description is \(section.description) for value \(section.rawValue)")
         return section.description
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = SettingsSection(rawValue: indexPath.section) else { return 0 }
+        return section == .ageRange ? 95 : 45 
+        
     }
 }
