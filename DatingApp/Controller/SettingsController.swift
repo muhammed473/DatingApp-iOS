@@ -16,8 +16,17 @@ class SettingsController : UITableViewController {
     private let headerPhotosViews = HeaderPhotosViews()
     private let imagePicker = UIImagePickerController()
     private var imageIndex = 0
+    private let userModel : UserModel
     
     // MARK: - Lifecycle
+    
+    init(userModel : UserModel) {
+        self.userModel = userModel
+        super.init(style: .plain)
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +96,9 @@ extension SettingsController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellClassIdentifer, for: indexPath) as! SettingsCellsView
+        guard let section = SettingsSection(rawValue: indexPath.section) else{return cell}
+        let settingsViewModel = SettingsViewModel(userModel: self.userModel, sections: section)
+        cell.settingsViewModel = settingsViewModel
         return cell
     }
 }
@@ -103,7 +115,7 @@ extension SettingsController {
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let section = SettingsSection(rawValue: indexPath.section) else { return 0 }
-        return section == .ageRange ? 95 : 45 
+        return section == .ageRange ? 95 : 45
         
     }
 }

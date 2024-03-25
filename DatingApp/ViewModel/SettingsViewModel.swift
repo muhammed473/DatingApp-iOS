@@ -26,5 +26,33 @@ enum SettingsSection:Int, CaseIterable {
 }
 
 struct SettingsViewModel {
+    private let userModel : UserModel
+    private let sections : SettingsSection
+    let placeHolder: String
+    var value : String?
     
+    var inputFieldHidingStatus : Bool {
+        return sections == .ageRange
+    }
+    var sliderHidingStatus : Bool {
+        return sections != .ageRange
+    }
+    
+    init(userModel:UserModel,sections:SettingsSection){
+        self.userModel = userModel
+        self.sections = sections
+        placeHolder = "Enter \(sections.description.lowercased()).."
+        switch sections {
+        case .name:
+            value = userModel.name
+        case .job:
+            value = userModel.job
+        case .age:
+            value = "\(userModel.age)"
+        case .bio:
+            value = userModel.bio
+        case .ageRange:
+            break
+        }
+    }
 }

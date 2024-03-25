@@ -15,7 +15,6 @@ class SettingsCellsView : UITableViewCell {
        let txtField = UITextField()
         txtField.font = UIFont.systemFont(ofSize: 15)
         txtField.borderStyle = .none
-        txtField.placeholder = "Uygun bilgilerinizi giriniz."
         let paddingView = UIView()
         paddingView.setDimensions(height: 48, width: 26)
         txtField.leftView = paddingView
@@ -23,17 +22,34 @@ class SettingsCellsView : UITableViewCell {
         
         return txtField
     }()
-    let ageMinLabel = UILabel()
-    let ageMaxLabel = UILabel()
+    let minAgeLabel = UILabel()
+    let maxAgeLabel = UILabel()
     lazy var minAgeSlider = ageRangeSliderCreate()
     lazy var maxAgeSlider = ageRangeSliderCreate()
+    var sliderStack = UIStackView()
+    var settingsViewModel : SettingsViewModel! {
+        didSet {configure() }
+    }
     
     // MARK: - Lifecycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        minAgeLabel.text = "Min: 18"
+        maxAgeLabel.text = "Max: 65"
         addSubview(inputField)
         inputField.fillSuperview()
+        let minStack = UIStackView(arrangedSubviews: [minAgeLabel ,minAgeSlider])
+        minStack.spacing = 23
+        let maxStack = UIStackView(arrangedSubviews: [maxAgeLabel,maxAgeSlider])
+        maxStack.spacing = 23
+        sliderStack = UIStackView(arrangedSubviews: [minStack,maxStack])
+        sliderStack.axis = .vertical
+        sliderStack.spacing = 15
+        addSubview(sliderStack)
+        sliderStack.centerY(inView: self)
+        sliderStack.anchor(left: leftAnchor,right: rightAnchor,paddingLeft: 23,
+        paddingRight: 23)
         
     }
     required init?(coder: NSCoder) {
@@ -51,6 +67,13 @@ class SettingsCellsView : UITableViewCell {
     }
     
     // MARK: - Actions
+    
+    func configure() {
+        inputField.isHidden = settingsViewModel.inputFieldHidingStatus
+        sliderStack.isHidden = settingsViewModel.sliderHidingStatus
+        inputField.placeholder = settingsViewModel.placeHolder
+        inputField.text = settingsViewModel.value
+    }
     
     @objc func touchAgeRangeChanged(){
         

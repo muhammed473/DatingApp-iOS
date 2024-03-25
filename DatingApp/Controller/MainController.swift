@@ -23,6 +23,7 @@ class MainController: UIViewController {
     private var cardViewModels = [CardViewModel](){
         didSet{configureCards()}
     }
+    private var  userModel : UserModel?
     
     // MARK: - Lifecycle
     
@@ -32,6 +33,7 @@ class MainController: UIViewController {
         configureUI()
       //  logOut()
         fetchUsers()
+        fetchUser()
     }
     
    // MARK: - Assistant
@@ -92,8 +94,7 @@ class MainController: UIViewController {
     func fetchUser() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         Service.fetchUserData(uid: uid) { userModelValues in
-            print("FireStore'dan veriler çekildi.")
-            print("İsim : \(userModelValues.name)")
+            self.userModel = userModelValues
         }
     }
     
@@ -112,7 +113,8 @@ class MainController: UIViewController {
 extension MainController: MainNavigationStackViewDelegate {
     func settingsShow() {
         print("PRİNT: MainController scriptinden SettingsController sınıfına geçiş yapılıyor.. ")
-        let settingsController = SettingsController()
+        guard let userModelValues = self.userModel else {return}
+        let settingsController = SettingsController(userModel: userModelValues)
         let navi = UINavigationController(rootViewController: settingsController)
         navi.modalPresentationStyle = .fullScreen
         present(navi, animated: true, completion: nil)
