@@ -9,6 +9,10 @@ import UIKit
 
 private let cellClassIdentifer = "SettingsCell"
 
+protocol SettingsControllerDelegate: class {
+    func updatingSettingsController(settingsController:SettingsController,updateUserModel : UserModel)
+}
+
 class SettingsController : UITableViewController {
     
     // MARK: - Properties
@@ -16,7 +20,8 @@ class SettingsController : UITableViewController {
     private let headerPhotosViews = HeaderPhotosViews()
     private let imagePicker = UIImagePickerController()
     private var imageIndex = 0
-    private let userModel : UserModel
+    private var userModel : UserModel
+    weak var delegate : SettingsControllerDelegate?
     
     // MARK: - Lifecycle
     
@@ -33,7 +38,7 @@ class SettingsController : UITableViewController {
         configureUI()
     }
     
-    // MARK: Assistants
+    // MARK: - Assistants
     
     func configureUI(){
         headerPhotosViews.delegate = self
@@ -45,8 +50,8 @@ class SettingsController : UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(touchDone))
         tableView.separatorStyle = .none
         tableView.tableHeaderView = headerPhotosViews
-        tableView.backgroundColor = .systemGroupedBackground
         tableView.register(SettingsCellsView.self, forCellReuseIdentifier: cellClassIdentifer)
+       // tableView.backgroundColor = .systemGroupedBackground
         headerPhotosViews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
     }
     
@@ -61,12 +66,13 @@ class SettingsController : UITableViewController {
     }
     
     @objc func touchDone() {
-        print("Done button was clicked.")
+        view.endEditing(true)
+        delegate?.updatingSettingsController(settingsController: self, updateUserModel: userModel)
     }
     
 }
 
-   // MARK: - HeaderForDelegates
+// MARK: - HeaderForDelegates
 
 extension SettingsController: HeaderPhotosViewsDelegate{
     func setHeaderPhotosViews(headerPhotos: HeaderPhotosViews, didSelect index: Int) {
@@ -99,13 +105,15 @@ extension SettingsController {
         guard let section = SettingsSection(rawValue: indexPath.section) else{return cell}
         let settingsViewModel = SettingsViewModel(userModel: self.userModel, sections: section)
         cell.settingsViewModel = settingsViewModel
+        cell.delegate = self
+       
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
 
-extension SettingsController {
+extension SettingsController{
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 32
     }
@@ -116,6 +124,29 @@ extension SettingsController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let section = SettingsSection(rawValue: indexPath.section) else { return 0 }
         return section == .ageRange ? 95 : 45
-        
     }
 }
+
+// MARK: - SettingsCellViewDelegate
+
+extension SettingsController:SettingsCellViewDelegate {
+    func updatingSettingsCell(_ cell: SettingsCellsView,value: String,section: SettingsSection) {
+        switch section {
+        case .name:
+            userModel.name = value
+        case .job:
+            userModel.job = value 
+        case .age:
+            userModel.age = Int(value) ?? userModel.age
+        case .bio:
+            userModel.bio = value
+        case .ageRange:
+            break
+        }
+    }
+    
+   
+    
+    
+}
+

@@ -7,20 +7,25 @@
 
 import UIKit
 
-class SettingsCellsView : UITableViewCell {
+protocol SettingsCellViewDelegate : class {
+    func updatingSettingsCell(_ cell: SettingsCellsView, value:String,section:SettingsSection)
+}
+
+class SettingsCellsView : UITableViewCell{
     
     // MARK: - Properties
-    
+    weak var delegate : SettingsCellViewDelegate?
     lazy var inputField : UITextField = {
-       let txtField = UITextField()
-        txtField.font = UIFont.systemFont(ofSize: 15)
-        txtField.borderStyle = .none
+       let tf = UITextField()
+         print(tf.isEnabled)
+        tf.borderStyle = .none
+        tf.font = UIFont.systemFont(ofSize: 15)
         let paddingView = UIView()
         paddingView.setDimensions(height: 48, width: 26)
-        txtField.leftView = paddingView
-        txtField.leftViewMode = .always
-        
-        return txtField
+        tf.leftView = paddingView
+        tf.leftViewMode = .always
+         tf.addTarget(SettingsCellsView.self, action: #selector(touchUpdateUserInfos), for:.editingDidEnd)
+        return tf
     }()
     let minAgeLabel = UILabel()
     let maxAgeLabel = UILabel()
@@ -35,10 +40,11 @@ class SettingsCellsView : UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        minAgeLabel.text = "Min: 18"
-        maxAgeLabel.text = "Max: 65"
+        backgroundColor = .red
         addSubview(inputField)
         inputField.fillSuperview()
+        minAgeLabel.text = "Min: 18"
+        maxAgeLabel.text = "Max: 65"
         let minStack = UIStackView(arrangedSubviews: [minAgeLabel ,minAgeSlider])
         minStack.spacing = 23
         let maxStack = UIStackView(arrangedSubviews: [maxAgeLabel,maxAgeSlider])
@@ -79,4 +85,12 @@ class SettingsCellsView : UITableViewCell {
         
     }
     
+    @objc func touchUpdateUserInfos(sender:UITextField){
+        guard let value = sender.text else {return}
+        delegate?.updatingSettingsCell(self, value: value, section: settingsViewModel.sections)
+    }
+    
 }
+
+
+

@@ -27,7 +27,7 @@ enum SettingsSection:Int, CaseIterable {
 
 struct SettingsViewModel {
     private let userModel : UserModel
-    private let sections : SettingsSection
+     let sections : SettingsSection
     let placeHolder: String
     var value : String?
     

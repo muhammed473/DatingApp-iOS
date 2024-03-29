@@ -110,11 +110,14 @@ class MainController: UIViewController {
     
     }
 
+// MARK: - MainNavigationStackViewDelegate
+
 extension MainController: MainNavigationStackViewDelegate {
     func settingsShow() {
         print("PRİNT: MainController scriptinden SettingsController sınıfına geçiş yapılıyor.. ")
         guard let userModelValues = self.userModel else {return}
         let settingsController = SettingsController(userModel: userModelValues)
+        settingsController.delegate = self
         let navi = UINavigationController(rootViewController: settingsController)
         navi.modalPresentationStyle = .fullScreen
         present(navi, animated: true, completion: nil)
@@ -122,6 +125,15 @@ extension MainController: MainNavigationStackViewDelegate {
     
     func messagesShow() {
         print("PRİNT: MainController scriptinden mesajlar sayfası ayarlanıyor.. ")
+    }
+}
+
+// MARK: - SettingsControllerDelegate
+
+extension MainController:SettingsControllerDelegate{
+    func updatingSettingsController(settingsController: SettingsController, updateUserModel: UserModel) {
+        settingsController.dismiss(animated: true)
+        self.userModel = updateUserModel
     }
     
     
