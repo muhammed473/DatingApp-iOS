@@ -8,16 +8,16 @@
 import UIKit
 
 protocol SettingsCellViewDelegate : class {
-    func updatingSettingsCell(_ cell: SettingsCellsView, value:String,section:SettingsSection)
+    func updatingSettingsCell(_ cell: SettingsCellsView, value: String,section : SettingsSection)
+    func updatingSettingsCell(_ cell: SettingsCellsView,sender : UISlider)
 }
 
-class SettingsCellsView : UITableViewCell{
+class SettingsCellsView : UITableViewCell,UITextFieldDelegate{
     
     // MARK: - Properties
     weak var delegate : SettingsCellViewDelegate?
-    lazy var inputField : UITextField = {
+    lazy var inputFields : UITextField = {
        let tf = UITextField()
-         print(tf.isEnabled)
         tf.borderStyle = .none
         tf.font = UIFont.systemFont(ofSize: 15)
         let paddingView = UIView()
@@ -40,11 +40,11 @@ class SettingsCellsView : UITableViewCell{
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .red
-        addSubview(inputField)
-        inputField.fillSuperview()
-        minAgeLabel.text = "Min: 18"
-        maxAgeLabel.text = "Max: 65"
+        selectionStyle = .none
+        addSubview(inputFields)
+        inputFields.fillSuperview()
+        inputFields.textColor = .red
+       
         let minStack = UIStackView(arrangedSubviews: [minAgeLabel ,minAgeSlider])
         minStack.spacing = 23
         let maxStack = UIStackView(arrangedSubviews: [maxAgeLabel,maxAgeSlider])
@@ -64,6 +64,18 @@ class SettingsCellsView : UITableViewCell{
     
     // MARK: - Assistans
     
+    func configure() {
+        inputFields.isHidden = settingsViewModel.inputFieldHidingStatus
+        sliderStack.isHidden = settingsViewModel.sliderHidingStatus
+        inputFields.placeholder = settingsViewModel.placeHolder
+        inputFields.text = settingsViewModel.value
+        minAgeLabel.text = settingsViewModel.minAgeLabelSliderResult(value: settingsViewModel.minAgeSliderValue)
+        maxAgeLabel.text = settingsViewModel.maxAgeLabelSliderResult(value: settingsViewModel.maxAgeSliderValue)
+        minAgeSlider.setValue(settingsViewModel.minAgeSliderValue, animated: true)
+        maxAgeSlider.setValue(settingsViewModel.maxAgeSliderValue, animated: true)
+    
+    }
+    
     func ageRangeSliderCreate() -> UISlider{
         let slider = UISlider()
         slider.maximumValue = 60
@@ -74,21 +86,22 @@ class SettingsCellsView : UITableViewCell{
     
     // MARK: - Actions
     
-    func configure() {
-        inputField.isHidden = settingsViewModel.inputFieldHidingStatus
-        sliderStack.isHidden = settingsViewModel.sliderHidingStatus
-        inputField.placeholder = settingsViewModel.placeHolder
-        inputField.text = settingsViewModel.value
-    }
-    
-    @objc func touchAgeRangeChanged(){
-        
+    @objc func touchAgeRangeChanged(sender: UISlider){
+        if sender == minAgeSlider {
+            minAgeLabel.text = settingsViewModel.minAgeLabelSliderResult(value: sender.value)
+        }else{
+            maxAgeLabel.text = settingsViewModel.maxAgeLabelSliderResult(value: sender.value)
+        }
+        delegate?.updatingSettingsCell(self, sender: sender)
     }
     
     @objc func touchUpdateUserInfos(sender:UITextField){
         guard let value = sender.text else {return}
         delegate?.updatingSettingsCell(self, value: value, section: settingsViewModel.sections)
     }
+    
+ 
+    
     
 }
 

@@ -37,6 +37,12 @@ struct SettingsViewModel {
     var sliderHidingStatus : Bool {
         return sections != .ageRange
     }
+    var minAgeSliderValue:Float {
+        return Float(userModel.minSeekingAge)
+    }
+    var maxAgeSliderValue:Float {
+        return Float(userModel.maxSeekingAge)
+    }
     
     init(userModel:UserModel,sections:SettingsSection){
         self.userModel = userModel
@@ -54,5 +60,13 @@ struct SettingsViewModel {
         case .ageRange:
             break
         }
+    }
+    
+    func minAgeLabelSliderResult(value:Float) -> String{
+        return "Min:\(Int(value))"
+    }
+    
+    func maxAgeLabelSliderResult(value:Float) -> String {
+        return "Max:\(Int(value))"
     }
 }

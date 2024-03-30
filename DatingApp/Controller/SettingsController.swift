@@ -51,7 +51,7 @@ class SettingsController : UITableViewController {
         tableView.separatorStyle = .none
         tableView.tableHeaderView = headerPhotosViews
         tableView.register(SettingsCellsView.self, forCellReuseIdentifier: cellClassIdentifer)
-       // tableView.backgroundColor = .systemGroupedBackground
+      //  tableView.backgroundColor = .systemGroupedBackground
         headerPhotosViews.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
     }
     
@@ -106,8 +106,12 @@ extension SettingsController {
         let settingsViewModel = SettingsViewModel(userModel: self.userModel, sections: section)
         cell.settingsViewModel = settingsViewModel
         cell.delegate = self
-       
+        cell.backgroundColor = .yellow
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       print("HÜCREYE TIKLADIM...")
     }
 }
 
@@ -130,6 +134,16 @@ extension SettingsController{
 // MARK: - SettingsCellViewDelegate
 
 extension SettingsController:SettingsCellViewDelegate {
+    func updatingSettingsCell(_ cell: SettingsCellsView, sender: UISlider) {
+        if sender == cell.minAgeSlider {
+            userModel.minSeekingAge = Int(sender.value)
+        }
+        else {
+            userModel.maxSeekingAge = Int(sender.value)
+        }
+        
+    }
+    
     func updatingSettingsCell(_ cell: SettingsCellsView,value: String,section: SettingsSection) {
         switch section {
         case .name:
@@ -145,8 +159,7 @@ extension SettingsController:SettingsCellViewDelegate {
         }
     }
     
-   
-    
-    
 }
+
+
 

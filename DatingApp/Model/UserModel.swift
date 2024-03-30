@@ -14,8 +14,8 @@ struct UserModel {
     let uid : String
     let profileImageUrl:String
     var job : String
-    var minSeekingAge : Int = 18
-    var maxSeekingAge : Int = 65
+    var minSeekingAge : Int
+    var maxSeekingAge : Int
     var bio : String
     
     init(dictionary: [String:Any]) {
@@ -26,6 +26,7 @@ struct UserModel {
         self.profileImageUrl = dictionary["imageUrl"] as? String ?? ""
         self.job = dictionary["job"] as? String ?? ""
         self.minSeekingAge = dictionary["minSeekingAge"] as? Int ?? 18
+        self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int ?? 65
         self.bio = dictionary["bio"] as? String ?? ""
     }
 }
