@@ -43,9 +43,7 @@ class CardView : UIView{
         super.init(frame: .zero)
         
         configureGestureRecognizers()
-        
         imageView.sd_setImage(with: cardviewModel.imageUrl)
-        
         backgroundColor = .purple
         layer.cornerRadius = 12
         clipsToBounds = true

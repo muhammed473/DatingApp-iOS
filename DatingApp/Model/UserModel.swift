@@ -12,7 +12,7 @@ struct UserModel {
     var age : Int
     var email : String
     let uid : String
-    let profileImageUrl:String
+    let imageURLS:[String]
     var job : String
     var minSeekingAge : Int
     var maxSeekingAge : Int
@@ -23,7 +23,7 @@ struct UserModel {
         self.age = dictionary["age"] as? Int ?? 0
         self.email = dictionary["email"] as? String ?? ""
         self.uid = dictionary["uid"] as? String ?? ""
-        self.profileImageUrl = dictionary["imageUrl"] as? String ?? ""
+        self.imageURLS = dictionary["imageURLS"] as? [String] ?? [String]()
         self.job = dictionary["job"] as? String ?? ""
         self.minSeekingAge = dictionary["minSeekingAge"] as? Int ?? 18
         self.maxSeekingAge = dictionary["maxSeekingAge"] as? Int ?? 65

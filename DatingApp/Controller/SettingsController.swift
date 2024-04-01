@@ -17,7 +17,7 @@ class SettingsController : UITableViewController {
     
     // MARK: - Properties
     
-    private let headerPhotosViews = HeaderPhotosViews()
+    private lazy var headerPhotosViews = HeaderPhotosViews(userModel: userModel)
     private let imagePicker = UIImagePickerController()
     private var imageIndex = 0
     private var userModel : UserModel
@@ -102,17 +102,15 @@ extension SettingsController {
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellClassIdentifer, for: indexPath) as! SettingsCellsView
+        cell.delegate = self
         guard let section = SettingsSection(rawValue: indexPath.section) else{return cell}
         let settingsViewModel = SettingsViewModel(userModel: self.userModel, sections: section)
         cell.settingsViewModel = settingsViewModel
-        cell.delegate = self
         cell.backgroundColor = .yellow
+        cell.contentView.isUserInteractionEnabled = false
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       print("HÜCREYE TIKLADIM...")
-    }
 }
 
 // MARK: - UITableViewDelegate
@@ -144,7 +142,7 @@ extension SettingsController:SettingsCellViewDelegate {
         
     }
     
-    func updatingSettingsCell(_ cell: SettingsCellsView,value: String,section: SettingsSection) {
+    func updatingSettingsCellTextField(_ cell: SettingsCellsView,value: String,section: SettingsSection) {
         switch section {
         case .name:
             userModel.name = value

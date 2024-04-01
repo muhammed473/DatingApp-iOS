@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SettingsCellViewDelegate : class {
-    func updatingSettingsCell(_ cell: SettingsCellsView, value: String,section : SettingsSection)
+    func updatingSettingsCellTextField(_ cell: SettingsCellsView, value: String,section : SettingsSection)
     func updatingSettingsCell(_ cell: SettingsCellsView,sender : UISlider)
 }
 
@@ -24,7 +24,7 @@ class SettingsCellsView : UITableViewCell,UITextFieldDelegate{
         paddingView.setDimensions(height: 48, width: 26)
         tf.leftView = paddingView
         tf.leftViewMode = .always
-         tf.addTarget(SettingsCellsView.self, action: #selector(touchUpdateUserInfos), for:.editingDidEnd)
+        tf.addTarget(self, action: #selector(touchUpdateUserInfos), for: .editingDidEnd)
         return tf
     }()
     let minAgeLabel = UILabel()
@@ -97,7 +97,8 @@ class SettingsCellsView : UITableViewCell,UITextFieldDelegate{
     
     @objc func touchUpdateUserInfos(sender:UITextField){
         guard let value = sender.text else {return}
-        delegate?.updatingSettingsCell(self, value: value, section: settingsViewModel.sections)
+      //  delegate?.updatingSettingsCell(self, value: value, section: settingsViewModel.sections)
+        delegate?.updatingSettingsCellTextField(self, value: value, section: settingsViewModel.sections)
     }
     
  

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol HeaderPhotosViewsDelegate : class{
     func setHeaderPhotosViews(headerPhotos: HeaderPhotosViews, didSelect index:Int)
@@ -15,13 +16,15 @@ class HeaderPhotosViews: UIView{
     
     // MARK: - Properties
     
+    private let userModel:UserModel
     var allButtons = [UIButton]()
     weak var delegate : HeaderPhotosViewsDelegate?
     
     // MARK: - Lifecycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+     init(userModel: UserModel) {
+         self.userModel = userModel
+        super.init(frame: .zero)
         backgroundColor = .systemGroupedBackground
         let button1 = createButtons(index: 0)
         let button2 = createButtons(index: 1)
@@ -39,7 +42,7 @@ class HeaderPhotosViews: UIView{
         stacks.spacing = 15
         addSubview(stacks)
         stacks.anchor(top:topAnchor,left: button1.rightAnchor,bottom: bottomAnchor,right: rightAnchor,paddingTop: 15,paddingLeft: 15,paddingBottom: 15,paddingRight: 15)
-        
+        loadUserPhotos()
     }
     
     required init?(coder: NSCoder) {
@@ -47,6 +50,15 @@ class HeaderPhotosViews: UIView{
     }
     
     // MARK: - Assistans
+    
+    func loadUserPhotos() {
+        let imageURLS = userModel.imageURLS.map({URL(string: $0)})
+        for (index,url) in imageURLS.enumerated() {
+            SDWebImageManager.shared.loadImage(with: url,options:.continueInBackground,progress: nil){ image,_,_,_,_,_ in
+                self.allButtons[index].setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+            }
+        }
+    }
     
     func createButtons(index:Int) -> UIButton {
         let button = UIButton(type: .system)

@@ -28,7 +28,7 @@ struct AuthenticationService {
                 [
                                     "email" : authCredentialsModel.email,
                                     "fullName" : authCredentialsModel.fullName,
-                                    "imageUrl" : imageUrl,
+                                    "imageURLS" : [imageUrl],
                                     "age" : 22,
                                     "uid" : uid
                 ] as [String:Any]
