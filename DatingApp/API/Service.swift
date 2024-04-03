@@ -48,4 +48,19 @@ struct Service {
             })
         }
     }
+    
+   static func saveUserData(userModel:UserModel,completion: @escaping(Error?) -> Void){
+       let data = [ "uid" : userModel.uid,
+                   "fullName": userModel.name,
+                   "imageURLS": userModel.imageURLS ,
+                    "age": userModel.age,
+                   "bio":userModel.bio,
+                   "job":userModel.job,
+                   "minSeekingAge":userModel.minSeekingAge,
+                    "maxSeekingAge" : userModel.maxSeekingAge] as [String : Any]
+            
+       FireStoreUsers.document(userModel.uid).setData(data, completion: completion)
+            
+            
+    }
 }

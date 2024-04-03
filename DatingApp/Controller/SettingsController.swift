@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 private let cellClassIdentifer = "SettingsCell"
 
@@ -67,7 +68,25 @@ class SettingsController : UITableViewController {
     
     @objc func touchDone() {
         view.endEditing(true)
-        delegate?.updatingSettingsController(settingsController: self, updateUserModel: userModel)
+        let hud = JGProgressHUD()
+        hud.textLabel.text = "Veriler Kaydediliyor.."
+        hud.show(in: view)
+        Service.saveUserData(userModel: userModel) { error in
+            self.delegate?.updatingSettingsController(settingsController: self, updateUserModel: self.userModel)
+        }
+        
+    }
+    
+    // MARK: - Firebase Connections
+    
+    func uploadOtherImage(image: UIImage){
+        let hud = JGProgressHUD()
+        hud.textLabel.text = "Resim yükleniyor.."
+        hud.show(in: view)
+        Service.uploadImage(image: image) { imageUrl in
+            self.userModel.imageURLS.append(imageUrl)
+            hud.dismiss()
+        }
     }
     
 }
@@ -85,7 +104,8 @@ extension SettingsController: HeaderPhotosViewsDelegate{
 
 extension SettingsController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let selectedImage = info[.originalImage] as? UIImage
+        guard let selectedImage = info[.originalImage] as? UIImage else {return}
+        uploadOtherImage(image: selectedImage)
         setHeaderImages(image: selectedImage)
         dismiss(animated: true, completion: nil)
     }

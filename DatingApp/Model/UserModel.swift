@@ -12,7 +12,7 @@ struct UserModel {
     var age : Int
     var email : String
     let uid : String
-    let imageURLS:[String]
+    var imageURLS:[String]
     var job : String
     var minSeekingAge : Int
     var maxSeekingAge : Int

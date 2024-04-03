@@ -13,6 +13,7 @@ enum DirectionSwipe : Int{
     case right = 1
 }
 
+/// <#Description#>
 class CardView : UIView{
     
     // MARK: - Properties
