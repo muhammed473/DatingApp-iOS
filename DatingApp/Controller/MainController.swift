@@ -31,7 +31,6 @@ class MainController: UIViewController {
         super.viewDidLoad()
         userLoginCheck()
         configureUI()
-      //  logOut()
         fetchUsers()
         fetchUser()
     }
@@ -135,7 +134,11 @@ extension MainController:SettingsControllerDelegate{
         settingsController.dismiss(animated: true)
         self.userModel = updateUserModel
     }
-    
+     
+    func LogOutSettingsController(settingsController: SettingsController) {
+        settingsController.dismiss(animated: true,completion: nil)
+        logOut()
+    }
     
 }
 
