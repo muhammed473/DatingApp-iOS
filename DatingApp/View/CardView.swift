@@ -36,6 +36,7 @@ class CardView : UIView{
     }()
     private let gradientLayer = CAGradientLayer()
     private let cardviewModel : CardViewModel
+    private let barStackView = UIStackView()
     
     // MARK: - Lifecycle
     
@@ -50,6 +51,7 @@ class CardView : UIView{
         clipsToBounds = true
         addSubview(imageView)
         imageView.fillSuperview()
+        configureBarStackView()
         configureGradientlayer()
         addSubview(informationLabel)
         informationLabel.anchor(left : leftAnchor,bottom: bottomAnchor,right: rightAnchor,paddingLeft: 16,paddingBottom: 20,paddingRight: 16)
@@ -80,6 +82,19 @@ class CardView : UIView{
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(touchChangePhoto))
         addGestureRecognizer(tapGesture)
+    }
+    
+    func configureBarStackView(){
+        (0..<cardviewModel.imageURLS.count).forEach { _ in
+            let barView = UIView()
+            barView.backgroundColor = .barDeselectedColor
+            barStackView.addArrangedSubview(barView)
+        }
+        barStackView.arrangedSubviews.first?.backgroundColor = .white
+        addSubview(barStackView)
+        barStackView.anchor(top:topAnchor,left: leftAnchor,right: rightAnchor,paddingTop: 7,paddingLeft: 7,paddingRight: 7,height: 4)
+        barStackView.spacing = 4
+        barStackView.distribution = .fillEqually
     }
     
     func rotationPanCard(sender: UIPanGestureRecognizer){
@@ -134,11 +149,15 @@ class CardView : UIView{
         let showNextPhoto = location > self.frame.width / 2
         print("Bir sonraki fotoğrafı göstermek için ekranda doğru yere tıklanıldımı ? : \(showNextPhoto)")
         if showNextPhoto {
-        //    cardviewModel.nextPhotoShow()
+            cardviewModel.nextPhotoShow()
         }
         else {
-         //   cardviewModel.previousPhotoShow()
+            cardviewModel.previousPhotoShow()
         }
        // imageView.image = cardviewModel.currentImage
+        imageView.sd_setImage(with: cardviewModel.imageUrl)
+        barStackView.arrangedSubviews.forEach ({$0.backgroundColor = .barDeselectedColor})
+        barStackView.arrangedSubviews[cardviewModel.index].backgroundColor = .white
+    
     }
 }

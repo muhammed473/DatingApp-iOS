@@ -11,6 +11,7 @@ class CardViewModel {
     let userModel : UserModel
     let userInformationText : NSAttributedString
     private var imageIndex = 0
+    var index : Int { return imageIndex}
     var imageUrl: URL?
     let imageURLS : [String]
     
@@ -25,15 +26,15 @@ class CardViewModel {
         self.imageUrl = URL(string: self.imageURLS[0])
     }
     
-   /* func nextPhotoShow(){
-        guard imageIndex < userModel.images.count - 1 else {return}
+    func nextPhotoShow(){
+        guard imageIndex < imageURLS.count - 1 else {return}
         imageIndex += 1
-        currentImage = userModel.images[imageIndex].image
+        imageUrl = URL(string: imageURLS[imageIndex])
     }
     
     func previousPhotoShow(){
         guard imageIndex > 0  else {return}
         imageIndex -= 1
-        currentImage = userModel.images[imageIndex].image
-    } */
+        imageUrl = URL(string: imageURLS[imageIndex])
+    }
 }

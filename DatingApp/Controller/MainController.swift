@@ -16,8 +16,8 @@ class MainController: UIViewController {
     private let lowerStack = LowerStackViews()
     private let cardView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemPink
-        view.layer.cornerRadius = 5 
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 10
         return view
     }()
     private var cardViewModels = [CardViewModel](){
