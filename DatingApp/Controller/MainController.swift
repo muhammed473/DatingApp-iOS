@@ -11,7 +11,7 @@ import Firebase
 class MainController: UIViewController {
 
     // MARK: - Properties
-    
+
     private let upperStack = MainNavigationStackView()
     private let lowerStack = LowerStackViews()
     private let cardView: UIView = {
@@ -47,12 +47,14 @@ class MainController: UIViewController {
         stacks.isLayoutMarginsRelativeArrangement = true
         stacks.layoutMargins = .init(top: 0, left: 12, bottom: 0, right: 12)
         stacks.bringSubviewToFront(cardView)
+        
     }
     
     func configureCards(){
         print("Card'lar şimdi oluşturuluyor..")
         self.cardViewModels.forEach { cardViewModel in
             let currentCardView = CardView(cardviewModel: cardViewModel)
+            currentCardView.delegate  = self
             cardView.addSubview(currentCardView)
             currentCardView.fillSuperview()
         }
@@ -139,6 +141,18 @@ extension MainController:SettingsControllerDelegate{
         settingsController.dismiss(animated: true,completion: nil)
         logOut()
     }
+    
+}
+
+// MARK: - CardViewDelegate
+
+extension MainController: CardViewDelegate {
+    func profileCardView(view: CardView, userModel: UserModel) {
+        let profileController = ProfileController(userModel: userModel)
+        profileController.modalPresentationStyle = .fullScreen
+        present(profileController, animated: true, completion: nil)
+    }
+    
     
 }
 

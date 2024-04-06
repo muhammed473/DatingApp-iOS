@@ -13,7 +13,10 @@ enum DirectionSwipe : Int{
     case right = 1
 }
 
-/// <#Description#>
+protocol CardViewDelegate: class {
+    func profileCardView( view:CardView,userModel:UserModel)
+}
+
 class CardView : UIView{
     
     // MARK: - Properties
@@ -32,11 +35,13 @@ class CardView : UIView{
     private lazy var informationButton : UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "info_icon")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(touchShowProfile), for: .touchUpInside)
         return button
     }()
     private let gradientLayer = CAGradientLayer()
     private let cardviewModel : CardViewModel
     private let barStackView = UIStackView()
+    weak var delegate : CardViewDelegate?
     
     // MARK: - Lifecycle
     
@@ -159,5 +164,9 @@ class CardView : UIView{
         barStackView.arrangedSubviews.forEach ({$0.backgroundColor = .barDeselectedColor})
         barStackView.arrangedSubviews[cardviewModel.index].backgroundColor = .white
     
+    }
+    
+    @objc func touchShowProfile() {
+        delegate?.profileCardView(view: self, userModel: cardviewModel.userModel)
     }
 }
