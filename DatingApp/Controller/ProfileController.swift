@@ -13,6 +13,7 @@ class ProfileController:UIViewController {
     // MARK: - Properties
     
     private let userModel : UserModel
+    private lazy var profileViewModel = ProfileViewModel(userModel: userModel)
     private lazy var collectionView : UICollectionView = {
         let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width + 100)
         let layout = UICollectionViewFlowLayout()
@@ -37,20 +38,17 @@ class ProfileController:UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "Fatih DOĞRUYOL - 28"
         return label
     }()
     private let jobLabel : UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "iOS Developer"
         return label
     }()
     private let bioLabel : UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "Merhaba en çok sevdiğim şeyler : Kitap okumak,Müzik dinlemek ve yürüyüş yapmak.."
         return label
     }()
     private lazy var disLikeButton : UIButton = {
@@ -83,7 +81,7 @@ class ProfileController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+        loadUserData()
     }
     
     // MARK: - Assistant
@@ -119,6 +117,12 @@ class ProfileController:UIViewController {
         return button
     }
     
+    func loadUserData(){
+        infoLabel.attributedText = profileViewModel.userDetailsAttributed
+        jobLabel.text = profileViewModel.job
+        bioLabel.text = profileViewModel.bio
+    }
+    
     // MARK: - Actions
     
     @objc func touchExitButton() {
@@ -149,15 +153,13 @@ extension ProfileController: UICollectionViewDelegate {
 
 extension ProfileController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userModel.imageURLS.count
+        return profileViewModel.imageCount
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileCellIdentifer, for: indexPath)
-        if indexPath.row == 0 {
-            cell.backgroundColor = .red
-        }
-        else { cell.backgroundColor = .blue }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: profileCellIdentifer, for: indexPath) as! ProfileCellView
+        cell.imageView.sd_setImage(with: profileViewModel.imageURLS[indexPath.row])
+    
         return cell
     }
     

@@ -9,8 +9,14 @@ import UIKit
 
 class ProfileCellView: UICollectionViewCell {
     
+    let imageView = UIImageView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "kelly1")
+        addSubview(imageView)
+        imageView.fillSuperview()
         
     }
     
