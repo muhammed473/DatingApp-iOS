@@ -33,14 +33,14 @@ struct Service {
         }
     }
     
-  static  func fetchUsersData(completion : @escaping([UserModel]) -> Void) {
+    static  func fetchUsersData(completion : @escaping([UserModel]) -> Void) {
         var users = [UserModel]()
         FireStoreUsers.getDocuments { allPersons, error in
             allPersons?.documents.forEach({ snapshot in
                 let dictionary = snapshot.data()
                 let usersModelsValues = UserModel(dictionary: dictionary)
                 users.append(usersModelsValues)
-                 if users.count == allPersons?.documents.count{
+                if users.count == allPersons?.documents.count{
                     print("Kişi sayısı : \(allPersons?.documents.count)")
                     print("Users array count : \(users.count)")
                     completion(users)
@@ -49,18 +49,34 @@ struct Service {
         }
     }
     
-   static func saveUserData(userModel:UserModel,completion: @escaping(Error?) -> Void){
-       let data = [ "uid" : userModel.uid,
-                   "fullName": userModel.name,
-                   "imageURLS": userModel.imageURLS ,
-                    "age": userModel.age,
-                   "bio":userModel.bio,
-                   "job":userModel.job,
-                   "minSeekingAge":userModel.minSeekingAge,
-                    "maxSeekingAge" : userModel.maxSeekingAge] as [String : Any]
+    static func saveUserData(userModel:UserModel,completion: @escaping(Error?) -> Void){
+        let data = [ "uid" : userModel.uid,
+                     "fullName": userModel.name,
+                     "imageURLS": userModel.imageURLS ,
+                     "age": userModel.age,
+                     "bio":userModel.bio,
+                     "job":userModel.job,
+                     "minSeekingAge":userModel.minSeekingAge,
+                     "maxSeekingAge" : userModel.maxSeekingAge] as [String : Any]
+        
+        FireStoreUsers.document(userModel.uid).setData(data, completion: completion)
+        
+        
+    }
+    
+    static func saveSwipe(userModel:UserModel,isLike:Bool){
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+       // let tellLikeStatus = isLike ? 1:0
+        FireStoreSwipes.document(uid).getDocument { (snapshot,error)  in
+          let data =  [userModel.uid : isLike]
+            if snapshot?.exists == true {
+                FireStoreSwipes.document(uid).updateData(data)
+            } else {
+                FireStoreSwipes.document(uid).setData(data)
+            }
             
-       FireStoreUsers.document(userModel.uid).setData(data, completion: completion)
-            
-            
+        }
+        
+        
     }
 }

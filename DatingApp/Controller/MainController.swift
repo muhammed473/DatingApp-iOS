@@ -182,11 +182,15 @@ extension MainController: LowerStackViewsDelegate {
     func touchLike() {
         guard let frontCard = frontCardView else {return}
         performSwipeAnimation(isTouchLike: true)
+        Service.saveSwipe(userModel: frontCard.cardviewModel.userModel, isLike:true)
         print("PRİNT: BEĞENDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
     func touchDislike() {
+       guard let frontCard = frontCardView else {return}
        performSwipeAnimation(isTouchLike: false)
+       Service.saveSwipe(userModel: frontCard.cardviewModel.userModel, isLike:false)
+       print("PRİNT: BEĞENMEDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
     func touchRefresh() {
