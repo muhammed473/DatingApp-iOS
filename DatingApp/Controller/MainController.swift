@@ -24,6 +24,8 @@ class MainController: UIViewController {
         didSet{configureCards()}
     }
     private var  userModel : UserModel?
+    private var frontCardView : CardView?
+    private var  cardViewArray = [CardView]()
     
     // MARK: - Lifecycle
     
@@ -56,10 +58,12 @@ class MainController: UIViewController {
         self.cardViewModels.forEach { cardViewModel in
             let currentCardView = CardView(cardviewModel: cardViewModel)
             currentCardView.delegate  = self
+           // cardViewArray.append(currentCardView)
             cardView.addSubview(currentCardView)
             currentCardView.fillSuperview()
         }
-        
+        cardViewArray = cardView.subviews.map({($0 as? CardView)!})
+        frontCardView = cardViewArray.last
     }
     
     func presentLoginController(){
@@ -70,6 +74,21 @@ class MainController: UIViewController {
             self.present(nav, animated: true)
         }
         
+    }
+    
+    func performSwipeAnimation(isTouchLike: Bool){
+        let translation: CGFloat = isTouchLike ? 700 : -700
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.1, options: .curveEaseOut,animations: {
+            self.frontCardView?.frame = CGRect(x:translation,y:0,
+                                               width: (self.frontCardView?.frame.width)!,
+                                               height: (self.frontCardView?.frame.height)!)
+        }) { _ in
+            self.frontCardView?.removeFromSuperview()
+            guard !self.cardViewArray.isEmpty else {return}
+            self.cardViewArray.remove(at: self.cardViewArray.count-1)
+            self.frontCardView = self.cardViewArray.last
+        }
+
     }
     
     // MARK: - Firebase Connections
@@ -161,15 +180,17 @@ extension MainController: CardViewDelegate {
 
 extension MainController: LowerStackViewsDelegate {
     func touchLike() {
-        print("PRİNT : LİKE BUTONUNA TIKLANDI.")
+        guard let frontCard = frontCardView else {return}
+        performSwipeAnimation(isTouchLike: true)
+        print("PRİNT: BEĞENDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
     func touchDislike() {
-        print("PRİNT : DİSLİKE BUTONUNA TIKLANDI.")
+       performSwipeAnimation(isTouchLike: false)
     }
     
     func touchRefresh() {
-        print("PRİNT: REFRESH BUTONUNA TIKLANDI.")
+       
     }
     
     

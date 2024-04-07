@@ -39,7 +39,7 @@ class CardView : UIView{
         return button
     }()
     private let gradientLayer = CAGradientLayer()
-    private let cardviewModel : CardViewModel
+    let cardviewModel : CardViewModel
     private lazy var barStackView = SegmentedBarView(numberOfSegments: cardviewModel.imageURLS.count)
     weak var delegate : CardViewDelegate?
     
