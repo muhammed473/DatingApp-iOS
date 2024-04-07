@@ -40,6 +40,7 @@ class MainController: UIViewController {
     func configureUI(){
         view.backgroundColor = .white
         upperStack.delegate = self
+        lowerStack.delegate = self
         let stacks = UIStackView(arrangedSubviews: [upperStack,cardView,lowerStack])
         stacks.axis = .vertical
         view.addSubview(stacks)
@@ -156,3 +157,20 @@ extension MainController: CardViewDelegate {
     
 }
 
+// MARK: - LowerStackViewsDelegate
+
+extension MainController: LowerStackViewsDelegate {
+    func touchLike() {
+        print("PRİNT : LİKE BUTONUNA TIKLANDI.")
+    }
+    
+    func touchDislike() {
+        print("PRİNT : DİSLİKE BUTONUNA TIKLANDI.")
+    }
+    
+    func touchRefresh() {
+        print("PRİNT: REFRESH BUTONUNA TIKLANDI.")
+    }
+    
+    
+}
