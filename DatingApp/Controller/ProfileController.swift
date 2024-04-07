@@ -66,6 +66,12 @@ class ProfileController:UIViewController {
         btn.addTarget(self, action: #selector(touchLike), for: .touchUpInside)
         return btn
     }()
+    private lazy var barStackView = SegmentedBarView(numberOfSegments: profileViewModel.imageURLS.count)
+    private let blurView : UIVisualEffectView = {
+        let blur = UIBlurEffect(style: .regular)
+        let view = UIVisualEffectView(effect: blur)
+        return view
+    }()
     
     // MARK: - Lifecycle
     
@@ -97,7 +103,11 @@ class ProfileController:UIViewController {
         infosStack.spacing = 5
         view.addSubview(infosStack)
         infosStack.anchor(top:collectionView.bottomAnchor,left:view.leftAnchor,right: view.rightAnchor,paddingTop: 10,paddingLeft: 10,paddingRight: 10)
+        view.addSubview(blurView)
+        blurView.anchor(top:view.topAnchor,left:view.leftAnchor,bottom:view.safeAreaLayoutGuide.topAnchor,right:view.rightAnchor)
+       
         configureLowerControls()
+        configureBarStackView()
     }
     
     func configureLowerControls() {
@@ -123,6 +133,11 @@ class ProfileController:UIViewController {
         bioLabel.text = profileViewModel.bio
     }
     
+    func configureBarStackView(){
+        view.addSubview(barStackView)
+        barStackView.anchor(top:view.topAnchor,left: view.leftAnchor,right: view.rightAnchor,paddingTop: 50,paddingLeft: 7,paddingRight: 7,height: 4)
+    }
+    
     // MARK: - Actions
     
     @objc func touchExitButton() {
@@ -146,7 +161,9 @@ class ProfileController:UIViewController {
 // MARK: - UICollectionViewDelegate
 
 extension ProfileController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        barStackView.setSelected(index: indexPath.row)
+    }
 }
 
 // MARK: - UICollectionViewDataSource

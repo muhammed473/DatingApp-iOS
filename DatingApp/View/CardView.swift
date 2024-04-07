@@ -40,7 +40,7 @@ class CardView : UIView{
     }()
     private let gradientLayer = CAGradientLayer()
     private let cardviewModel : CardViewModel
-    private let barStackView = UIStackView()
+    private lazy var barStackView = SegmentedBarView(numberOfSegments: cardviewModel.imageURLS.count)
     weak var delegate : CardViewDelegate?
     
     // MARK: - Lifecycle
@@ -90,16 +90,8 @@ class CardView : UIView{
     }
     
     func configureBarStackView(){
-        (0..<cardviewModel.imageURLS.count).forEach { _ in
-            let barView = UIView()
-            barView.backgroundColor = .barDeselectedColor
-            barStackView.addArrangedSubview(barView)
-        }
-        barStackView.arrangedSubviews.first?.backgroundColor = .white
         addSubview(barStackView)
         barStackView.anchor(top:topAnchor,left: leftAnchor,right: rightAnchor,paddingTop: 7,paddingLeft: 7,paddingRight: 7,height: 4)
-        barStackView.spacing = 4
-        barStackView.distribution = .fillEqually
     }
     
     func rotationPanCard(sender: UIPanGestureRecognizer){
@@ -161,8 +153,7 @@ class CardView : UIView{
         }
        // imageView.image = cardviewModel.currentImage
         imageView.sd_setImage(with: cardviewModel.imageUrl)
-        barStackView.arrangedSubviews.forEach ({$0.backgroundColor = .barDeselectedColor})
-        barStackView.arrangedSubviews[cardviewModel.index].backgroundColor = .white
+        barStackView.setSelected(index: cardviewModel.index)
     
     }
     
