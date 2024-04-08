@@ -169,6 +169,7 @@ extension MainController:SettingsControllerDelegate{
 extension MainController: CardViewDelegate {
     func profileCardView(view: CardView, userModel: UserModel) {
         let profileController = ProfileController(userModel: userModel)
+        profileController.delegate = self
         profileController.modalPresentationStyle = .fullScreen
         present(profileController, animated: true, completion: nil)
     }
@@ -204,5 +205,22 @@ extension MainController: LowerStackViewsDelegate {
        
     }
     
+}
+
+// MARK: - ProfileControllerDelegate
+
+extension MainController : ProfileControllerDelegate {
+    func profileControllerTouchLike(controller: ProfileController, userModel: UserModel) {
+        controller.dismiss(animated: true) {
+            self.performSwipeAnimation(isTouchLike: true)
+            Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: true)
+        }
+    }
     
+    func profileControllerTouchDislike(controller: ProfileController, userModel: UserModel) {
+        controller.dismiss(animated: true) {
+            self.performSwipeAnimation(isTouchLike: false)
+            Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: false)
+        }
+    }
 }

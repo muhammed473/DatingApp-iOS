@@ -8,6 +8,12 @@
 import UIKit
 
 private let profileCellIdentifer = "profileCell"
+
+protocol ProfileControllerDelegate : class {
+    func profileControllerTouchLike(controller:ProfileController,userModel : UserModel)
+    func profileControllerTouchDislike(controller:ProfileController, userModel : UserModel)
+}
+
 class ProfileController:UIViewController {
    
     // MARK: - Properties
@@ -72,6 +78,7 @@ class ProfileController:UIViewController {
         let view = UIVisualEffectView(effect: blur)
         return view
     }()
+    weak var delegate : ProfileControllerDelegate?
     
     // MARK: - Lifecycle
     
@@ -145,7 +152,7 @@ class ProfileController:UIViewController {
     }
     
     @objc func touchDisLike() {
-        
+        delegate?.profileControllerTouchDislike(controller: self, userModel: userModel)
     }
     
     @objc func touchSuperLike() {
@@ -153,7 +160,7 @@ class ProfileController:UIViewController {
     }
     
     @objc func touchLike() {
-        
+        delegate?.profileControllerTouchLike(controller: self, userModel: userModel)
     }
     
 }
