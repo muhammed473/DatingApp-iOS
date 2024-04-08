@@ -34,7 +34,7 @@ class MainController: UIViewController {
         userLoginCheck()
         configureUI()
         fetchUsers()
-        fetchUser()
+        fetchCurrentUserAndCards()
     }
     
    // MARK: - Assistant
@@ -69,6 +69,7 @@ class MainController: UIViewController {
     func presentLoginController(){
         DispatchQueue.main.async {
             let loginController = LoginController()
+            loginController.delegate  = self
             let nav = UINavigationController(rootViewController: loginController)
             nav.modalPresentationStyle = .fullScreen
             self.present(nav, animated: true)
@@ -112,13 +113,6 @@ class MainController: UIViewController {
         }
     }
     
-    func fetchUser() {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        Service.fetchUserData(uid: uid) { userModelValues in
-            self.userModel = userModelValues
-        }
-    }
-    
     func fetchUsers(){
         Service.fetchUsersData { usersModelsValues in
          //   print("Kullanıcıların modellerinin değerleri(kullanıcılar) : \(usersModelsValues)")
@@ -129,7 +123,15 @@ class MainController: UIViewController {
             }
         }
     
+    func fetchCurrentUserAndCards(){
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        Service.fetchUserData(uid: uid) { userModelValues in
+            self.userModel = userModelValues
+            self.fetchUsers()
+        }
     }
+    
+}
 
 // MARK: - MainNavigationStackViewDelegate
 
@@ -223,4 +225,15 @@ extension MainController : ProfileControllerDelegate {
             Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: false)
         }
     }
+}
+
+// MARK: - AuthenticationDelegate
+
+extension MainController : AuthenticationDelegate {
+    func authenticationComplete() {
+        dismiss(animated: true, completion: nil)
+        fetchCurrentUserAndCards()
+    }
+    
+    
 }

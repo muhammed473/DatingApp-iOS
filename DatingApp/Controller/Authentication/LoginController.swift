@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol AuthenticationDelegate : class {
+    func authenticationComplete()
+}
+
 class LoginController : UIViewController {
     
     // MARK: - Properties
+    weak var delegate : AuthenticationDelegate?
     private let symbolImageView : UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "app_icon")?.withRenderingMode(.alwaysTemplate)
@@ -88,12 +93,14 @@ class LoginController : UIViewController {
                 print("Kullanıcı kaydedilirken hata oluştu : \(error.localizedDescription)")
                 return
             }
-            self.dismiss(animated: true,completion: nil)
+            self.delegate?.authenticationComplete()
         }
     }
     
     @objc func touchRegisterButton() {
-        navigationController?.pushViewController(RegisterController(), animated: true)
+        let controller = RegisterController()
+        controller.delegate = delegate
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func textFieldsDidChange (currentTextField : UITextField ) {

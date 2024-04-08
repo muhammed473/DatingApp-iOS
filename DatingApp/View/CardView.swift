@@ -49,7 +49,7 @@ class CardView : UIView{
     init(cardviewModel: CardViewModel) {
         self.cardviewModel = cardviewModel
         super.init(frame: .zero)
-        
+        backgroundColor = .white
         configureGestureRecognizers()
         imageView.sd_setImage(with: cardviewModel.imageUrl)
         backgroundColor = .purple

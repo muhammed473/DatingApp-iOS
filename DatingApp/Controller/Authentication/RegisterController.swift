@@ -10,6 +10,7 @@ import UIKit
 class RegisterController: UIViewController{
     
     // MARK: - Properties
+    weak var delegate : AuthenticationDelegate?
     private let photoButton : UIButton = {
        let button = UIButton()
         button.tintColor = .white
@@ -102,7 +103,7 @@ class RegisterController: UIViewController{
                 print("Kullanıcı kaydedilirken hata oluştu : \(error.localizedDescription)")
                 return
             }
-            print("Kullanıcı başarıyla kaydedildi.")
+            self.delegate?.authenticationComplete()
         }
     }
     
