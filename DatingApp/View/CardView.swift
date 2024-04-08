@@ -15,6 +15,7 @@ enum DirectionSwipe : Int{
 
 protocol CardViewDelegate: class {
     func profileCardView( view:CardView,userModel:UserModel)
+    func swipedPerson(view:CardView, didLikeUser : Bool)
 }
 
 class CardView : UIView{
@@ -117,7 +118,8 @@ class CardView : UIView{
         }) { _ in
             print("Animation finish.")
             if shouldDeclineCard {
-                self.removeFromSuperview()
+                let didLike = direction == .right
+                self.delegate?.swipedPerson(view: self, didLikeUser: didLike)
             }
             
         }

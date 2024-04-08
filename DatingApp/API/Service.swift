@@ -64,7 +64,7 @@ struct Service {
         
     }
     
-    static func saveSwipe(userModel:UserModel,isLike:Bool){
+    static func saveSwipesOrButtonsClick(userModel:UserModel,isLike:Bool){
         guard let uid = Auth.auth().currentUser?.uid else {return}
        // let tellLikeStatus = isLike ? 1:0
         FireStoreSwipes.document(uid).getDocument { (snapshot,error)  in

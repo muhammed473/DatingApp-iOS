@@ -173,6 +173,13 @@ extension MainController: CardViewDelegate {
         present(profileController, animated: true, completion: nil)
     }
     
+    func swipedPerson(view: CardView, didLikeUser: Bool) {
+        view.removeFromSuperview()
+        self.cardViewArray.removeAll(where: {view == $0})
+        guard let userModel = frontCardView?.cardviewModel.userModel else {return}
+        Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: didLikeUser)
+        self.frontCardView = cardViewArray.last
+    }
     
 }
 
@@ -182,14 +189,14 @@ extension MainController: LowerStackViewsDelegate {
     func touchLike() {
         guard let frontCard = frontCardView else {return}
         performSwipeAnimation(isTouchLike: true)
-        Service.saveSwipe(userModel: frontCard.cardviewModel.userModel, isLike:true)
+        Service.saveSwipesOrButtonsClick(userModel: frontCard.cardviewModel.userModel, isLike:true)
         print("PRİNT: BEĞENDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
     func touchDislike() {
        guard let frontCard = frontCardView else {return}
        performSwipeAnimation(isTouchLike: false)
-       Service.saveSwipe(userModel: frontCard.cardviewModel.userModel, isLike:false)
+       Service.saveSwipesOrButtonsClick(userModel: frontCard.cardviewModel.userModel, isLike:false)
        print("PRİNT: BEĞENMEDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
