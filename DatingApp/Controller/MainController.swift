@@ -33,7 +33,6 @@ class MainController: UIViewController {
         super.viewDidLoad()
         userLoginCheck()
         configureUI()
-        fetchUsers()
         fetchCurrentUserAndCards()
     }
     
@@ -113,8 +112,8 @@ class MainController: UIViewController {
         }
     }
     
-    func fetchUsers(){
-        Service.fetchUsersData { usersModelsValues in
+    func fetchUsers(currentUserModel:UserModel){
+        Service.fetchUsersData(currentUserModel: currentUserModel) { usersModelsValues in
          //   print("Kullanıcıların modellerinin değerleri(kullanıcılar) : \(usersModelsValues)")
             self.cardViewModels = usersModelsValues.map({CardViewModel(userModel: $0)})
            /* usersModelsValues.forEach { user in
@@ -127,7 +126,7 @@ class MainController: UIViewController {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         Service.fetchUserData(uid: uid) { userModelValues in
             self.userModel = userModelValues
-            self.fetchUsers()
+            self.fetchUsers(currentUserModel: userModelValues)
         }
     }
     

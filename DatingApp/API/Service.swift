@@ -33,15 +33,20 @@ struct Service {
         }
     }
     
-    static  func fetchUsersData(completion : @escaping([UserModel]) -> Void) {
+    static  func fetchUsersData(currentUserModel:UserModel,completion : @escaping([UserModel]) -> Void) {
         var users = [UserModel]()
-        FireStoreUsers.getDocuments { allPersons, error in
-            allPersons?.documents.forEach({ snapshot in
+        let query = FireStoreUsers
+            .whereField("age", isGreaterThanOrEqualTo:currentUserModel.minSeekingAge )
+            .whereField("age", isLessThanOrEqualTo: currentUserModel.maxSeekingAge)
+        query.getDocuments { allPersons, error in
+            guard let allPersons = allPersons else {return}
+            allPersons.documents.forEach({ snapshot in
                 let dictionary = snapshot.data()
                 let usersModelsValues = UserModel(dictionary: dictionary)
+                guard usersModelsValues.uid != Auth.auth().currentUser?.uid else {return}
                 users.append(usersModelsValues)
-                if users.count == allPersons?.documents.count{
-                    print("Kişi sayısı : \(allPersons?.documents.count)")
+                if users.count == allPersons.documents.count - 1{
+                    print("Kişi sayısı : \(allPersons.documents.count - 1)")
                     print("Users array count : \(users.count)")
                     completion(users)
                 }
