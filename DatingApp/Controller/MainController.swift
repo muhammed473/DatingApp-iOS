@@ -136,8 +136,16 @@ class MainController: UIViewController {
             guard didLike == true else {return}
             Service.checkIfMatch(userModel: userModel) { didMatch in
                 print("PRİNT : KULLANICILAR EŞLEŞTİ.")
+                self.presentMatchView(matchedUserModel: userModel)
             }
         }
+    }
+    
+    func presentMatchView(matchedUserModel:UserModel){
+        guard let currentUserModel = self.userModel else {return}
+        let matchView = MatchView(currentUserModel: currentUserModel, matchedUserModel: matchedUserModel)
+        view.addSubview(matchView)
+        matchView.fillSuperview()
     }
     
 }
