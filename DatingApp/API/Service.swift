@@ -69,18 +69,31 @@ struct Service {
         
     }
     
-    static func saveSwipesOrButtonsClick(userModel:UserModel,isLike:Bool){
+    static func saveSwipesOrButtonsClick(userModel:UserModel,isLike:Bool,completion:((Error?) ->Void )?){
         guard let uid = Auth.auth().currentUser?.uid else {return}
        // let tellLikeStatus = isLike ? 1:0
         FireStoreSwipes.document(uid).getDocument { (snapshot,error)  in
           let data =  [userModel.uid : isLike]
             if snapshot?.exists == true {
-                FireStoreSwipes.document(uid).updateData(data)
+                FireStoreSwipes.document(uid).updateData(data,completion: completion)
             } else {
-                FireStoreSwipes.document(uid).setData(data)
+                FireStoreSwipes.document(uid).setData(data,completion: completion)
             }
             
         }
+        
+        
+    }
+    
+    static func checkIfMatch(userModel: UserModel,completion: @escaping(Bool) -> Void ) {
+        guard let currentUid = Auth.auth().currentUser?.uid else {return}
+        FireStoreSwipes.document(userModel.uid).getDocument { snapshot, error in
+            guard let data = snapshot?.data() else {return}
+            guard  let didMatch = data[currentUid] as? Bool  else {return}
+            completion(didMatch)
+            
+        }
+        
         
         
     }

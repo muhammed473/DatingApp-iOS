@@ -130,6 +130,16 @@ class MainController: UIViewController {
         }
     }
     
+    func saveSwipeAndCheckForMatch(userModel:UserModel,didLike: Bool){
+        Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: didLike) { error in
+            self.frontCardView = self.cardViewArray.last
+            guard didLike == true else {return}
+            Service.checkIfMatch(userModel: userModel) { didMatch in
+                print("PRİNT : KULLANICILAR EŞLEŞTİ.")
+            }
+        }
+    }
+    
 }
 
 // MARK: - MainNavigationStackViewDelegate
@@ -179,7 +189,7 @@ extension MainController: CardViewDelegate {
         view.removeFromSuperview()
         self.cardViewArray.removeAll(where: {view == $0})
         guard let userModel = frontCardView?.cardviewModel.userModel else {return}
-        Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: didLikeUser)
+        saveSwipeAndCheckForMatch(userModel: userModel, didLike: didLikeUser)
         self.frontCardView = cardViewArray.last
     }
     
@@ -191,14 +201,14 @@ extension MainController: LowerStackViewsDelegate {
     func touchLike() {
         guard let frontCard = frontCardView else {return}
         performSwipeAnimation(isTouchLike: true)
-        Service.saveSwipesOrButtonsClick(userModel: frontCard.cardviewModel.userModel, isLike:true)
+        saveSwipeAndCheckForMatch(userModel: frontCard.cardviewModel.userModel, didLike: true)
         print("PRİNT: BEĞENDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
     func touchDislike() {
        guard let frontCard = frontCardView else {return}
        performSwipeAnimation(isTouchLike: false)
-       Service.saveSwipesOrButtonsClick(userModel: frontCard.cardviewModel.userModel, isLike:false)
+       Service.saveSwipesOrButtonsClick(userModel: frontCard.cardviewModel.userModel,isLike: false,completion: nil)
        print("PRİNT: BEĞENMEDİĞİM KULLANICI İSMİ : \(frontCard.cardviewModel.userModel.name)")
     }
     
@@ -214,14 +224,14 @@ extension MainController : ProfileControllerDelegate {
     func profileControllerTouchLike(controller: ProfileController, userModel: UserModel) {
         controller.dismiss(animated: true) {
             self.performSwipeAnimation(isTouchLike: true)
-            Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: true)
+            self.saveSwipeAndCheckForMatch(userModel: userModel, didLike: true)
         }
     }
     
     func profileControllerTouchDislike(controller: ProfileController, userModel: UserModel) {
         controller.dismiss(animated: true) {
             self.performSwipeAnimation(isTouchLike: false)
-            Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: false)
+            Service.saveSwipesOrButtonsClick(userModel: userModel, isLike: false, completion: nil)
         }
     }
 }
