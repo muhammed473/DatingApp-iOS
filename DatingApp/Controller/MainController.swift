@@ -10,6 +10,7 @@ import Firebase
 
 class MainController: UIViewController {
 
+
     // MARK: - Properties
 
     private let upperStack = MainNavigationStackView()
@@ -145,6 +146,7 @@ class MainController: UIViewController {
         guard let currentUserModel = self.userModel else {return}
         let matchViewModel = MatchViewModel(currentUserModel: currentUserModel, matchedUserModel: matchedUserModel)
         let matchView = MatchView(matchViewModel: matchViewModel)
+        matchView.delegate = self
         view.addSubview(matchView)
         matchView.fillSuperview()
     }
@@ -255,3 +257,14 @@ extension MainController : AuthenticationDelegate {
     
     
 }
+
+// MARK: - MatchViewDelegate
+
+extension MainController: MatchView.MatchViewDelegate {
+    func messageToMatchedUser(view: MatchView, userModel: UserModel) {
+        print(" PRİNT :  \(userModel.name) ile konuşma başlatılıyor..")
+    }
+    
+    
+}
+

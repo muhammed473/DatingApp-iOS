@@ -9,8 +9,13 @@ import UIKit
 
 class MatchView: UIView {
     
+    protocol  MatchViewDelegate:class {
+        func messageToMatchedUser(view:MatchView,userModel:UserModel)
+    }
+    
     // MARK: - Properties
     
+    weak  var delegate : MatchViewDelegate?
     private let matchViewModel: MatchViewModel
     private let matchImageView : UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "itsamatch"))
@@ -52,7 +57,7 @@ class MatchView: UIView {
         let btn = KeepSwipingButtonView(type: .system)
         btn.setTitle("KAYDIRMAYA DEVAM ET", for: .normal)
         btn.setTitleColor(.white, for: .normal)
-        btn.addTarget(self, action: #selector(touchKeepSwiping), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(touchAnywhereAndDismiss), for: .touchUpInside)
         return btn
     }()
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -145,11 +150,7 @@ class MatchView: UIView {
     // MARK: - Actions
     
     @objc func touchSendMessage() {
-        
-    }
-    
-    @objc func touchKeepSwiping() {
-        
+        delegate?.messageToMatchedUser(view: self, userModel : matchViewModel.matchedUserModel)
     }
     
     @objc func touchAnywhereAndDismiss() {

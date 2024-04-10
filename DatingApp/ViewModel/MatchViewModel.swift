@@ -9,7 +9,7 @@ import Foundation
 
 struct MatchViewModel {
     private let currentUserModel : UserModel
-    private let matchedUserModel : UserModel
+     let matchedUserModel : UserModel
     let matchLabelText : String
     var currentUserImageURL: URL?
     var matchedUserImageURL: URL?
@@ -22,8 +22,5 @@ struct MatchViewModel {
         guard let matchedImageUrlString = matchedUserModel.imageURLS.last else {return}
         currentUserImageURL = URL(string:currentImageUrlString )
         matchedUserImageURL = URL(string: matchedImageUrlString)
-        
-        
     }
-    
 }
