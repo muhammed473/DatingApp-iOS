@@ -44,15 +44,14 @@ class MatchView: UIView {
         return imageV
     }()
     private let sendMessageBtn : UIButton = {
-        let btn = UIButton(type: .system)
+        let btn = SendMessageButtonView(type: .system)
         btn.setTitle("MESAJ GÖNDER", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.addTarget(self, action: #selector(touchSendMessage), for: .touchUpInside)
-        
         return btn
     }()
     private let keepSwipingBtn : UIButton = {
-        let btn = UIButton(type: .system)
+        let btn = KeepSwipingButtonView(type: .system)
         btn.setTitle("KAYDIRMAYA DEVAM ET", for: .normal)
         btn.setTitleColor(.white, for: .normal)
         btn.addTarget(self, action: #selector(touchKeepSwiping), for: .touchUpInside)
@@ -92,7 +91,9 @@ class MatchView: UIView {
         matchedUserImageView.layer.cornerRadius = 70
         matchedUserImageView.centerY(inView: self)
         sendMessageBtn.anchor(top:currentUserImageView.bottomAnchor,left:leftAnchor,right: rightAnchor,paddingTop: 30,paddingLeft: 45,paddingRight: 45)
+        sendMessageBtn.heightAnchor.constraint(equalToConstant: 55).isActive = true
         keepSwipingBtn.anchor(top:sendMessageBtn.bottomAnchor,left:leftAnchor,right: rightAnchor,paddingTop: 16,paddingLeft: 45,paddingRight: 45)
+        keepSwipingBtn.heightAnchor.constraint(equalToConstant: 55).isActive = true
         infoLabel.anchor(left:leftAnchor,bottom: currentUserImageView.topAnchor,right: rightAnchor,paddingBottom: 30)
         matchImageView.anchor(bottom:infoLabel.topAnchor,paddingBottom: 16)
         matchImageView.setDimensions(height: 76, width: 310)

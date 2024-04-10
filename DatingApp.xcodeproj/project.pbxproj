@@ -21,6 +21,8 @@
 		C491C3ED2B9ADD7F0036571E /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C491C3EC2B9ADD7F0036571E /* UserModel.swift */; };
 		C4A210902BC1AF1F00CC25F4 /* ProfileCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A2108F2BC1AF1F00CC25F4 /* ProfileCellView.swift */; };
 		C4B15A182B9AECA800B701FA /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B15A172B9AECA800B701FA /* CardViewModel.swift */; };
+		C4B25F2C2BC675890095AD97 /* SendMessageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B25F2B2BC675890095AD97 /* SendMessageButtonView.swift */; };
+		C4B25F2E2BC675B80095AD97 /* KeepSwipingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B25F2D2BC675B80095AD97 /* KeepSwipingButtonView.swift */; };
 		C4B8D8242BC20B5300265990 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4B8D8232BC20B5300265990 /* ProfileViewModel.swift */; };
 		C4BC6BB32BA78CE1001A98CD /* HeaderPhotosViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4BC6BB22BA78CE1001A98CD /* HeaderPhotosViews.swift */; };
 		C4C0ECB52BC295B1009AC4EC /* SegmentedBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C0ECB42BC295B1009AC4EC /* SegmentedBarView.swift */; };
@@ -58,6 +60,8 @@
 		C491C3EC2B9ADD7F0036571E /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		C4A2108F2BC1AF1F00CC25F4 /* ProfileCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellView.swift; sourceTree = "<group>"; };
 		C4B15A172B9AECA800B701FA /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		C4B25F2B2BC675890095AD97 /* SendMessageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButtonView.swift; sourceTree = "<group>"; };
+		C4B25F2D2BC675B80095AD97 /* KeepSwipingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepSwipingButtonView.swift; sourceTree = "<group>"; };
 		C4B8D8232BC20B5300265990 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		C4BC6BB22BA78CE1001A98CD /* HeaderPhotosViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderPhotosViews.swift; sourceTree = "<group>"; };
 		C4C0ECB42BC295B1009AC4EC /* SegmentedBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedBarView.swift; sourceTree = "<group>"; };
@@ -192,6 +196,8 @@
 				C4A2108F2BC1AF1F00CC25F4 /* ProfileCellView.swift */,
 				C4C0ECB42BC295B1009AC4EC /* SegmentedBarView.swift */,
 				C41CF1952BC5C94B009401CA /* MatchView.swift */,
+				C4B25F2B2BC675890095AD97 /* SendMessageButtonView.swift */,
+				C4B25F2D2BC675B80095AD97 /* KeepSwipingButtonView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,6 +368,8 @@
 				C40E22CB2B9CEF35001DDAE5 /* AuthenticationViewModel.swift in Sources */,
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
 				C4CE33582B9B99BC00A3CD63 /* RegisterController.swift in Sources */,
+				C4B25F2C2BC675890095AD97 /* SendMessageButtonView.swift in Sources */,
+				C4B25F2E2BC675B80095AD97 /* KeepSwipingButtonView.swift in Sources */,
 				C491C3ED2B9ADD7F0036571E /* UserModel.swift in Sources */,
 				C4F11C662B98C50500FE31AA /* MainController.swift in Sources */,
 				C4DE53BC2BC177BB008826FA /* ProfileController.swift in Sources */,
