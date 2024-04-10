@@ -11,8 +11,7 @@ class MatchView: UIView {
     
     // MARK: - Properties
     
-    private let currentUserModel : UserModel
-    private let matchedUserModel : UserModel
+    private let matchViewModel: MatchViewModel
     private let matchImageView : UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "itsamatch"))
         imageView.contentMode = .scaleAspectFill
@@ -24,7 +23,6 @@ class MatchView: UIView {
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = .white
         label.numberOfLines = 0
-        label.text = "Sen ve Ayşe birbirinizi beğendiniz."
         return label
     }()
     private let currentUserImageView : UIImageView =  {
@@ -60,13 +58,12 @@ class MatchView: UIView {
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
     lazy var views = [matchImageView,infoLabel,currentUserImageView,matchedUserImageView,sendMessageBtn,keepSwipingBtn]
     
-    
     // MARK: - Lifecycle
     
-    init( currentUserModel:UserModel,matchedUserModel:UserModel) {
-        self.currentUserModel = currentUserModel
-        self.matchedUserModel = matchedUserModel
+    init(matchViewModel:MatchViewModel) {
+        self.matchViewModel = matchViewModel
         super.init(frame: .zero)
+        loadUsersData()
         configureBlurView()
         configureUI()
         configureAnimations()
@@ -81,13 +78,13 @@ class MatchView: UIView {
     func configureUI(){
         views.forEach { view in
             addSubview(view)
-            view.alpha = 1
+            view.alpha = 0
         }
-        currentUserImageView.anchor(left:centerXAnchor,paddingLeft: 14)
+        currentUserImageView.anchor(right:centerXAnchor,paddingRight: 14)
         currentUserImageView.setDimensions(height: 130, width: 130)
         currentUserImageView.layer.cornerRadius = 70
         currentUserImageView.centerY(inView: self)
-        matchedUserImageView.anchor(right:centerXAnchor,paddingRight: 14)
+        matchedUserImageView.anchor(left:centerXAnchor,paddingLeft: 14)
         matchedUserImageView.setDimensions(height: 130, width: 130)
         matchedUserImageView.layer.cornerRadius = 70
         matchedUserImageView.centerY(inView: self)
@@ -136,6 +133,12 @@ class MatchView: UIView {
             self.sendMessageBtn.transform = .identity
             self.keepSwipingBtn.transform = .identity
         },completion: nil )
+    }
+    
+    func loadUsersData(){
+        infoLabel.text = matchViewModel.matchLabelText
+        currentUserImageView.sd_setImage(with: matchViewModel.currentUserImageURL)
+        matchedUserImageView.sd_setImage(with: matchViewModel.matchedUserImageURL)
     }
     
     

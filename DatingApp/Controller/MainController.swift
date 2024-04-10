@@ -143,7 +143,8 @@ class MainController: UIViewController {
     
     func presentMatchView(matchedUserModel:UserModel){
         guard let currentUserModel = self.userModel else {return}
-        let matchView = MatchView(currentUserModel: currentUserModel, matchedUserModel: matchedUserModel)
+        let matchViewModel = MatchViewModel(currentUserModel: currentUserModel, matchedUserModel: matchedUserModel)
+        let matchView = MatchView(matchViewModel: matchViewModel)
         view.addSubview(matchView)
         matchView.fillSuperview()
     }
