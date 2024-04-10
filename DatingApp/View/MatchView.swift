@@ -69,6 +69,7 @@ class MatchView: UIView {
         super.init(frame: .zero)
         configureBlurView()
         configureUI()
+        configureAnimations()
     }
     
     required init?(coder: NSCoder) {
@@ -111,6 +112,32 @@ class MatchView: UIView {
             self.visualEffectView.alpha = 1
         },completion: nil)
     }
+    
+    func configureAnimations() {
+        views.forEach { $0.alpha = 1 }
+        let angle = 30*CGFloat.pi/180
+        currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle).concatenating(CGAffineTransform(translationX: 210, y: 0))
+        matchedUserImageView.transform = CGAffineTransform(rotationAngle: angle).concatenating(CGAffineTransform(translationX: -210, y: 0))
+        self.sendMessageBtn.transform = CGAffineTransform(translationX: -450, y: 0)
+        self.keepSwipingBtn.transform = CGAffineTransform(translationX: 450, y: 0)
+        // MARK: - Users Images Animations
+        UIView.animateKeyframes(withDuration: 1.3, delay: 0,options: .calculationModeCubic,animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5) {
+                self.currentUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+                self.matchedUserImageView.transform = CGAffineTransform(rotationAngle: -angle)
+            }
+            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.4) {
+                self.currentUserImageView.transform = .identity // Başlangıç pozisyonu.
+                self.matchedUserImageView.transform = .identity
+            }
+        },completion: nil)
+        // MARK: - Buttons Animations
+        UIView.animate(withDuration: 0.75, delay: 1.3 * 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.1,options: .curveEaseOut, animations: {
+            self.sendMessageBtn.transform = .identity
+            self.keepSwipingBtn.transform = .identity
+        },completion: nil )
+    }
+    
     
     // MARK: - Actions
     
