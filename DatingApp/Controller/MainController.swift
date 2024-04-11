@@ -168,6 +168,11 @@ extension MainController: MainNavigationStackViewDelegate {
     
     func messagesShow() {
         print("PRİNT: MainController scriptinden mesajlar sayfası ayarlanıyor.. ")
+        guard let userModel = userModel else {return}
+        let messageController = MessagesController(userModel: userModel)
+        let nav = UINavigationController(rootViewController: messageController)
+        nav.modalPresentationStyle = .fullScreen
+        present(nav, animated: true, completion: nil)
     }
 }
 

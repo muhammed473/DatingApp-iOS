@@ -40,6 +40,7 @@
 		C4E33A2C2BABB2D800F8E2BD /* SettingsCellsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E33A2B2BABB2D800F8E2BD /* SettingsCellsView.swift */; };
 		C4F11C662B98C50500FE31AA /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C652B98C50500FE31AA /* MainController.swift */; };
 		C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C682B98C5E000FE31AA /* Extensions.swift */; };
+		C4F7AF682BC7FAA50056C041 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F7AF672BC7FAA50056C041 /* MessagesController.swift */; };
 		C4F95C042B9C262E00C74A43 /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */; };
 		C4F95C062B9C313600C74A43 /* ButtonAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F95C052B9C313600C74A43 /* ButtonAuthentication.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		C4E33A2B2BABB2D800F8E2BD /* SettingsCellsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellsView.swift; sourceTree = "<group>"; };
 		C4F11C652B98C50500FE31AA /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		C4F11C682B98C5E000FE31AA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C4F7AF672BC7FAA50056C041 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
 		C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
 		C4F95C052B9C313600C74A43 /* ButtonAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAuthentication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +186,7 @@
 				C4F11C652B98C50500FE31AA /* MainController.swift */,
 				C4CCFF242BA72B4F003C9EE6 /* SettingsController.swift */,
 				C4DE53BB2BC177BB008826FA /* ProfileController.swift */,
+				C4F7AF672BC7FAA50056C041 /* MessagesController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				C42B58782BA10D28000827AC /* Constants.swift in Sources */,
 				C40491F02B99C70A00BECE41 /* CardView.swift in Sources */,
 				C40E22CB2B9CEF35001DDAE5 /* AuthenticationViewModel.swift in Sources */,
+				C4F7AF682BC7FAA50056C041 /* MessagesController.swift in Sources */,
 				C4CD874D2B98BF45005339B6 /* AppDelegate.swift in Sources */,
 				C4CE33582B9B99BC00A3CD63 /* RegisterController.swift in Sources */,
 				C4B25F2C2BC675890095AD97 /* SendMessageButtonView.swift in Sources */,

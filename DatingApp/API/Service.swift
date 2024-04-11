@@ -38,20 +38,21 @@ struct Service {
         let query = FireStoreUsers
             .whereField("age", isGreaterThanOrEqualTo:currentUserModel.minSeekingAge )
             .whereField("age", isLessThanOrEqualTo: currentUserModel.maxSeekingAge)
-        query.getDocuments { allPersons, error in
-            guard let allPersons = allPersons else {return}
-            allPersons.documents.forEach({ snapshot in
-                let dictionary = snapshot.data()
-                let usersModelsValues = UserModel(dictionary: dictionary)
-                guard usersModelsValues.uid != Auth.auth().currentUser?.uid else {return}
-                users.append(usersModelsValues)
-                if users.count == allPersons.documents.count - 1{
-                    print("Kişi sayısı : \(allPersons.documents.count - 1)")
-                    print("Users array count : \(users.count)")
-                    completion(users)
-                }
-            })
+        fetchSwipes { swipedUsersIdsAndLikeStatus in
+            query.getDocuments { allPersons, error in
+                guard let allPersons = allPersons else {return}
+                allPersons.documents.forEach({ snapshot in
+                    let dictionary = snapshot.data()
+                    let usersModelsValues = UserModel(dictionary: dictionary)
+                    guard usersModelsValues.uid != Auth.auth().currentUser?.uid else {return}
+                    guard swipedUsersIdsAndLikeStatus[usersModelsValues.uid] == nil else {return}
+                    users.append(usersModelsValues)
+                })
+                completion(users)
+            }
+            
         }
+        
     }
     
     static func saveUserData(userModel:UserModel,completion: @escaping(Error?) -> Void){
@@ -71,9 +72,9 @@ struct Service {
     
     static func saveSwipesOrButtonsClick(userModel:UserModel,isLike:Bool,completion:((Error?) ->Void )?){
         guard let uid = Auth.auth().currentUser?.uid else {return}
-       // let tellLikeStatus = isLike ? 1:0
+        // let tellLikeStatus = isLike ? 1:0
         FireStoreSwipes.document(uid).getDocument { (snapshot,error)  in
-          let data =  [userModel.uid : isLike]
+            let data =  [userModel.uid : isLike]
             if snapshot?.exists == true {
                 FireStoreSwipes.document(uid).updateData(data,completion: completion)
             } else {
@@ -91,10 +92,18 @@ struct Service {
             guard let data = snapshot?.data() else {return}
             guard  let didMatch = data[currentUid] as? Bool  else {return}
             completion(didMatch)
-            
         }
-        
-        
-        
     }
+    
+   private static func  fetchSwipes(completion: @escaping([String:Bool] ) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        FireStoreSwipes.document(uid).getDocument { (snapshot, error) in
+            guard let data = snapshot?.data() as? [String:Bool] else {
+                completion([String:Bool]())
+                return
+            }
+            completion(data)
+        }
+    }
+    
 }
