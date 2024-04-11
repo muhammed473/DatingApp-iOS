@@ -41,6 +41,8 @@
 		C4F11C662B98C50500FE31AA /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C652B98C50500FE31AA /* MainController.swift */; };
 		C4F11C692B98C5E000FE31AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F11C682B98C5E000FE31AA /* Extensions.swift */; };
 		C4F7AF682BC7FAA50056C041 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F7AF672BC7FAA50056C041 /* MessagesController.swift */; };
+		C4F7AF6A2BC8130C0056C041 /* MatchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F7AF692BC8130C0056C041 /* MatchHeaderView.swift */; };
+		C4F7AF6C2BC849960056C041 /* MatchCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F7AF6B2BC849960056C041 /* MatchCellView.swift */; };
 		C4F95C042B9C262E00C74A43 /* TextFieldCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */; };
 		C4F95C062B9C313600C74A43 /* ButtonAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F95C052B9C313600C74A43 /* ButtonAuthentication.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +86,8 @@
 		C4F11C652B98C50500FE31AA /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		C4F11C682B98C5E000FE31AA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		C4F7AF672BC7FAA50056C041 /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
+		C4F7AF692BC8130C0056C041 /* MatchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchHeaderView.swift; sourceTree = "<group>"; };
+		C4F7AF6B2BC849960056C041 /* MatchCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCellView.swift; sourceTree = "<group>"; };
 		C4F95C032B9C262E00C74A43 /* TextFieldCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCustom.swift; sourceTree = "<group>"; };
 		C4F95C052B9C313600C74A43 /* ButtonAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAuthentication.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +207,8 @@
 				C41CF1952BC5C94B009401CA /* MatchView.swift */,
 				C4B25F2B2BC675890095AD97 /* SendMessageButtonView.swift */,
 				C4B25F2D2BC675B80095AD97 /* KeepSwipingButtonView.swift */,
+				C4F7AF692BC8130C0056C041 /* MatchHeaderView.swift */,
+				C4F7AF6B2BC849960056C041 /* MatchCellView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -368,6 +374,7 @@
 			files = (
 				C4CCFF252BA72B4F003C9EE6 /* SettingsController.swift in Sources */,
 				C4C0ECB52BC295B1009AC4EC /* SegmentedBarView.swift in Sources */,
+				C4F7AF6A2BC8130C0056C041 /* MatchHeaderView.swift in Sources */,
 				C4F95C042B9C262E00C74A43 /* TextFieldCustom.swift in Sources */,
 				C42B58782BA10D28000827AC /* Constants.swift in Sources */,
 				C40491F02B99C70A00BECE41 /* CardView.swift in Sources */,
@@ -384,6 +391,7 @@
 				C40491EE2B999D2A00BECE41 /* LowerStackViews.swift in Sources */,
 				C41CF1962BC5C94B009401CA /* MatchView.swift in Sources */,
 				C4A210902BC1AF1F00CC25F4 /* ProfileCellView.swift in Sources */,
+				C4F7AF6C2BC849960056C041 /* MatchCellView.swift in Sources */,
 				C43ABC6B2B9DF00D00C1D5CC /* Service.swift in Sources */,
 				C4B8D8242BC20B5300265990 /* ProfileViewModel.swift in Sources */,
 				C4F95C062B9C313600C74A43 /* ButtonAuthentication.swift in Sources */,

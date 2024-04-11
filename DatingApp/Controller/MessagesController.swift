@@ -14,7 +14,7 @@ class MessagesController : UITableViewController{
     // MARK: - Properties
     
     private let userModel  : UserModel
-    
+    private let upperHeaderView = MatchHeaderView()
     
     // MARK: - Lifecycle
     
@@ -39,6 +39,8 @@ class MessagesController : UITableViewController{
         tableView.rowHeight = 84
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        upperHeaderView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 190)
+        tableView.tableHeaderView = upperHeaderView
     }
     
     func configureNavigationBar() {
@@ -82,12 +84,12 @@ extension MessagesController{
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        let label = UILabel()
-        label.text = "Mesajlar"
-        label.textColor =  #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        view.addSubview(label)
-        label.centerY(inView: view,leftAnchor: view.leftAnchor,paddingLeft: 10)
+        let normalHeaderLabel = UILabel()
+        normalHeaderLabel.text = "Mesajlar"
+        normalHeaderLabel.textColor =  #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+        normalHeaderLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        view.addSubview(normalHeaderLabel)
+        normalHeaderLabel.centerY(inView: view,leftAnchor: view.leftAnchor,paddingLeft: 10)
         return view
     }
     
