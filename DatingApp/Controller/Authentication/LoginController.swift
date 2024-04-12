@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 protocol AuthenticationDelegate : class {
     func authenticationComplete()
@@ -24,7 +25,9 @@ class LoginController : UIViewController {
     private let emailTextField = TextFieldCustom(placeHolder: "Email")
     private let passwordTextField = TextFieldCustom(placeHolder: "Password", isSecureText: true)
     private let authButton : ButtonAuthentication = {
-        let authButton = ButtonAuthentication(title: "Log In", buttonType: .system)
+        let authButton = ButtonAuthentication(type: .system)
+        authButton.setTitle("Log In", for: .normal)
+        authButton.titleLabel?.font = UIFont.systemFont(ofSize: 14,weight: .heavy)
         authButton.addTarget(self, action: #selector(touchLogInButton), for: .touchUpInside)
         return authButton
     }()
@@ -88,11 +91,16 @@ class LoginController : UIViewController {
     @objc func touchLogInButton() {
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
+        let hud = JGProgressHUD(style: .dark)
+      //  hud.textLabel.text = "Oturum açılıyor.."
+        hud.show(in: view)
         AuthenticationService.loginUser(email: email, password: password) { result,error in
             if let error = error {
                 print("Kullanıcı kaydedilirken hata oluştu : \(error.localizedDescription)")
+                hud.dismiss()
                 return
             }
+            hud.dismiss()
             self.delegate?.authenticationComplete()
         }
     }

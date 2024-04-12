@@ -231,7 +231,11 @@ extension MainController: LowerStackViewsDelegate {
     }
     
     func touchRefresh() {
-       
+        guard let userModel = self.userModel else {return}
+        Service.fetchUsersData(currentUserModel: userModel) { users in
+            self.cardViewModels = users.map({CardViewModel(userModel: $0)})
+        }
+        
     }
     
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 class RegisterController: UIViewController{
     
@@ -23,7 +24,9 @@ class RegisterController: UIViewController{
     private let fullNameTextField = TextFieldCustom(placeHolder: "Full Name")
     private let passwordTextField = TextFieldCustom(placeHolder: "Password", isSecureText: true)
     private let registerButton : ButtonAuthentication = {
-        let authButton = ButtonAuthentication(title: "Register", buttonType: .system)
+        let authButton = ButtonAuthentication(type: .system)
+        authButton.setTitle("Sign Up", for: .normal)
+        authButton.titleLabel?.font = UIFont.systemFont(ofSize: 14,weight: .heavy)
         authButton.addTarget(self, action: #selector(touchRegisterButton), for: .touchUpInside)
         return authButton
     }()
@@ -95,14 +98,19 @@ class RegisterController: UIViewController{
         guard let fullName = fullNameTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         guard let profileImage = self.profileImage else {return}
+        let hud = JGProgressHUD(style: .dark)
+      //  hud.textLabel.text = "Kayıt işleminiz tamamlanıyor.."
+        hud.show(in: view)
         let authCredentialsModelValues = AuthCredentialsModel(email: email, fullName: fullName,
                                                               password: password, profileImage: profileImage)
         
         AuthenticationService.registerUser(authCredentialsModel: authCredentialsModelValues) { error in
             if let error = error {
                 print("Kullanıcı kaydedilirken hata oluştu : \(error.localizedDescription)")
+                hud.dismiss()
                 return
             }
+            hud.dismiss()
             self.delegate?.authenticationComplete()
         }
     }
