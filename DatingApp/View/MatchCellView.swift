@@ -12,7 +12,7 @@ class MatchCellView: UICollectionViewCell {
     // MARK: - Properties
     
     private let profileImageView : UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "kelly1"))
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 2
@@ -21,17 +21,20 @@ class MatchCellView: UICollectionViewCell {
         imageView.layer.cornerRadius = 76/2
         return imageView
     }()
-    
     private let userNameLabel : UILabel = {
         let label = UILabel()
-        label.text = "Kelly 1 "
         label.font = UIFont.systemFont(ofSize: 13,weight: .semibold)
         label.textColor = .darkGray
         label.textAlignment = .center
         label.numberOfLines = 2
         return label
     }()
-    
+    var matchCellViewModel : MatchCellViewModel!{
+        didSet{
+            userNameLabel.text = matchCellViewModel.nameLabel
+            profileImageView.sd_setImage(with: matchCellViewModel.profileImageUrl)
+        }
+    }
     
     // MARK: - Lifecycle
     

@@ -31,6 +31,7 @@ class MessagesController : UITableViewController{
     override func viewDidLoad() {
         configureTableView()
         configureNavigationBar()
+        fetchMatches()
     }
     
     // MARK: - Assistants
@@ -66,6 +67,14 @@ class MessagesController : UITableViewController{
     }
     
     
+    // MARK: - Firebase Connection
+    
+    func fetchMatches(){
+        Service.fetchMatches { matchModelValues in
+            self.upperHeaderView.matchModelValues = matchModelValues
+        }
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -95,5 +104,5 @@ extension MessagesController{
     
 }
 
- 
+
 

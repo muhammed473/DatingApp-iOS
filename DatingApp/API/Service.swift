@@ -126,4 +126,13 @@ struct Service {
         
     }
     
+    static func fetchMatches(completion : @escaping ([MatchModel]) -> Void){
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        FireStoreMessages.document(currentUid).collection("matches").getDocuments { snapshot, error in
+            guard let snapshot = snapshot else {return}
+            let matchModelValue = snapshot.documents.map({MatchModel(dictionary: $0.data())})
+            completion(matchModelValue)
+        }
+    }
+    
 }
