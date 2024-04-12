@@ -59,11 +59,12 @@ extension MatchHeaderView : UICollectionViewDataSource {
         return 9
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifer,for: indexPath) as! MatchCellView
         return cell
     }
-    
+
     
 }
 

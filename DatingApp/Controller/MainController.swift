@@ -138,6 +138,8 @@ class MainController: UIViewController {
             Service.checkIfMatch(userModel: userModel) { didMatch in
                 print("PRİNT : KULLANICILAR EŞLEŞTİ.")
                 self.presentMatchView(matchedUserModel: userModel)
+                guard let currentUserModel = self.userModel else {return}
+                Service.uploadMatch(currentUserModel: currentUserModel, matchedUserModel: userModel)
             }
         }
     }

@@ -95,7 +95,7 @@ struct Service {
         }
     }
     
-   private static func  fetchSwipes(completion: @escaping([String:Bool] ) -> Void) {
+    private static func fetchSwipes(completion: @escaping([String:Bool] ) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else {return}
         FireStoreSwipes.document(uid).getDocument { (snapshot, error) in
             guard let data = snapshot?.data() as? [String:Bool] else {
@@ -104,6 +104,26 @@ struct Service {
             }
             completion(data)
         }
+    }
+    
+    static func uploadMatch(currentUserModel : UserModel,matchedUserModel: UserModel) {
+        guard let matchedProfileImageUrl = matchedUserModel.imageURLS.first else {return}
+        guard let currentUserProfileImageUrl = currentUserModel.imageURLS.first else {return}
+        let matchedUserdata = [
+                     "uid" : matchedUserModel.uid,
+                     "name" : matchedUserModel.name,
+                     "profileImageUrl" : matchedProfileImageUrl
+                   ]
+        FireStoreMessages.document(currentUserModel.uid).collection("matches").document(matchedUserModel.uid).setData(matchedUserdata)
+        
+        let currentUserdata = [
+            "uid" : currentUserModel.uid,
+            "name": currentUserModel.name,
+            "profileImageUrl" : currentUserProfileImageUrl
+           ]
+        FireStoreMessages.document(matchedUserModel.uid).collection("matches").document(currentUserModel.uid).setData(currentUserdata)
+        
+        
     }
     
 }
