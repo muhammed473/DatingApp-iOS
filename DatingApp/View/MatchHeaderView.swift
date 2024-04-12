@@ -9,8 +9,13 @@ import UIKit
 
 private let cellIdentifer = "cell"
 
+protocol MatchHeaderViewDelegate : class {
+    func matchHeaderProtocol(matchHeaderView: MatchHeaderView, matchedUid:String)
+}
+
 class MatchHeaderView : UICollectionReusableView {
     
+    weak var delegate : MatchHeaderViewDelegate?
     var matchModelValues = [MatchModel]() {
         didSet {myCollectionView.reloadData() }
     }
@@ -51,7 +56,11 @@ class MatchHeaderView : UICollectionReusableView {
 // MARK: - UICollectionViewDelegate
 
 extension MatchHeaderView : UICollectionViewDelegate{
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("PRİNT: Eşleşilen kişinin uid'si :\(matchModelValues[indexPath.row].uid) ")
+        let matchedUid = matchModelValues[indexPath.row].uid
+        delegate?.matchHeaderProtocol(matchHeaderView: self, matchedUid: matchedUid)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -76,6 +85,6 @@ extension MatchHeaderView : UICollectionViewDataSource {
 
 extension MatchHeaderView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 78, height: 95)
+        return CGSize(width: 100, height: 100)
     }
 }

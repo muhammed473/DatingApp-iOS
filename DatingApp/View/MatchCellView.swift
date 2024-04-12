@@ -26,7 +26,7 @@ class MatchCellView: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 13,weight: .semibold)
         label.textColor = .darkGray
         label.textAlignment = .center
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         return label
     }()
     var matchCellViewModel : MatchCellViewModel!{

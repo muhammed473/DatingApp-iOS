@@ -40,6 +40,7 @@ class MessagesController : UITableViewController{
         tableView.rowHeight = 84
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
+        upperHeaderView.delegate = self
         upperHeaderView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 190)
         tableView.tableHeaderView = upperHeaderView
     }
@@ -104,5 +105,14 @@ extension MessagesController{
     
 }
 
+// MARK: - MatchHeaderViewDelegate
+
+extension MessagesController : MatchHeaderViewDelegate{
+    func matchHeaderProtocol(matchHeaderView: MatchHeaderView, matchedUid: String) {
+        Service.fetchUserData(uid: matchedUid) { userModel in
+            print("PRİNT: \(userModel.name) ile sohbet başlatılıyor.")
+        }
+    }
+}
 
 
